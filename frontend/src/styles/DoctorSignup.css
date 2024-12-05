@@ -1,0 +1,83 @@
+.doctor-signup-container {
+  display: flex;
+  flex-wrap: wrap; /* Ensure the form adjusts if the fields overflow */
+  overflow-y: auto; /* Add vertical scroll if needed */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+.back-to-regular-signup {
+  text-align: right;
+  display: block;
+  margin-bottom: 1rem; /* Add some spacing below if needed */
+  font-size: 0.8rem;
+  color: #45b2eb;
+  text-decoration: none;
+}
+
+.bg-container {
+  max-height: 96vh;
+  overflow-y: auto; /* Enable scrolling inside the container */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  padding: 20px;
+  box-sizing: border-box;
+  margin: 0;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+.doctor-signup-left,
+.doctor-signup-right {
+  flex: 1;
+  box-sizing: border-box;
+  margin: 10px;
+}
+
+input {
+  max-width: 100%;
+  padding: 10px;
+  margin: 10px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+textarea,
+select,
+button {
+  max-width: 100%;
+  padding: 10px;
+  margin: 10px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+.doctor-form-header {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.time-slot-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.time-slot-table th,
+.time-slot-table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 15px;
+  background-color: #45b2eb;
+  color: white;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #359acb;
+}

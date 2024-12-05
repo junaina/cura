@@ -1,29 +1,34 @@
 const express = require("express");
-const path = require("path");
-const connectDB = require("./config/db"); // Import the database connection function
-require("dotenv").config(); // Load environment variables
+const dotenv = require("dotenv");
+const passport = require("passport");
+const connectDB = require("./config/db");
+const userRoutes = require("./routes/User");
+const cors = require("cors");
 
+// Load environment variables
+dotenv.config();
+
+// Initialize database
+connectDB();
+
+// Initialize app
 const app = express();
 
-// Connect to the database
-connectDB();
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Allow requests from your frontend
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true, // Include credentials if necessary
+  })
+);
 
 // Middleware
 app.use(express.json());
+require("./config/passport")(passport);
 
-// API Routes (Define these before serving the React app)
-app.get("/api/message", (req, res) => {
-  res.send("Welcome to the Backend!");
-});
+// Routes
+app.use("/api/users", userRoutes);
 
-// Serve React App (Static Files)
-app.use(express.static(path.join(__dirname, "frontend/build")));
-
-// Catch-All Route for React App
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend/build", "index.html"));
-});
-
-// Start the server
+// Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

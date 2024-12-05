@@ -1,0 +1,208 @@
+/* General container styling */
+.signup-container {
+  display: flex;
+  height: 100vh;
+  background-color: #f8f9fa; /* Main background */
+  justify-content: center;
+  align-items: center;
+  background-color: #45b2eb;
+  max-height: 98vh;
+  border-radius: 10px;
+}
+
+/* Left panel */
+.signup-left {
+  flex: 1.5;
+  height: 100vh;
+  padding: 2rem;
+  background-color: #ffffff; /* White panel */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 14px 0 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  z-index: 1;
+  border-radius: 20px;
+}
+.doctor-link {
+  text-align: right;
+  display: block;
+  margin-bottom: 1rem; /* Add some spacing below if needed */
+  font-size: 0.8rem;
+  color: #45b2eb;
+  text-decoration: none;
+}
+
+.doctor-link:hover {
+  text-decoration: underline;
+}
+
+.signup-header {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.signup-subheader {
+  margin-bottom: 1.5rem;
+}
+
+.signup-subheader .login-link {
+  color: #45b2eb;
+  text-decoration: none;
+}
+
+.signup-subheader .login-link:hover {
+  text-decoration: underline;
+}
+form {
+  display: flex; /* Use flexbox to align children vertically */
+  flex-direction: column; /* Stack the children vertically */
+  gap: 1rem; /* Add consistent spacing between children */
+  margin: 0; /* Remove any default margins */
+  padding: 0; /* Remove any default padding */
+  width: 100%; /* Ensure it matches the width of its parent */
+  box-sizing: border-box; /* Include padding and borders in width */
+}
+.input-group {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+
+  flex-direction: row;
+  box-sizing: border-box;
+}
+input[type="email"],
+input[type="password"] {
+  width: 100%; /* Ensure these inputs span the full width of the form */
+  box-sizing: border-box; /* Include padding and borders in width */
+}
+
+.input-group .input {
+  flex: 1; /* Ensure equal width for both input fields */
+  padding: 0.8rem; /* Ensure padding matches other inputs */
+  margin: 0; /* Reset any default margin */
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+input {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.signup-button {
+  background-color: #45b2eb;
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.signup-button:hover {
+  background-color: #0056b3;
+}
+
+/* Divider styling */
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0;
+  gap: 0.5rem;
+}
+
+.divider hr {
+  flex: 1;
+  border: 0;
+  border-top: 1px solid #ced4da;
+}
+
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.google-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Right panel */
+.signup-right {
+  flex: 1;
+  background-color: #45b2eb; /* Blue panel */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+  text-align: left;
+  padding: 0 2rem;
+  height: 98vh;
+  box-sizing: border-box;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+.logo-wrapper {
+  margin: 9rem 4rem;
+}
+.signup-logo {
+  font-size: 7rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  margin-top: 0;
+  padding: 0;
+}
+.logo-line {
+  width: 7rem; /* Set the length of the line */
+  height: 1.7rem; /* Adjust thickness */
+  background-color: #ffffff; /* Set the color to white */
+  border: none; /* Remove the default border style */
+  border-radius: 2px; /* Add rounded edges */
+  align-items: left;
+  text-align: left;
+  margin-bottom: 0;
+  margin-left: 0;
+  padding: 0;
+}
+
+.signup-tagline {
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .signup-container {
+    flex-direction: column;
+  }
+
+  .signup-left,
+  .signup-right {
+    flex: unset;
+    width: 100%;
+  }
+
+  .signup-left {
+    padding: 1.5rem;
+  }
+
+  .signup-right {
+    padding: 1.5rem;
+  }
+}

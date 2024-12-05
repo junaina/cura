@@ -1,21 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Signup from "./pages/Signup";
+import Dashboard from "./pages/Dashboard";
+import DoctorSignup from "./pages/DoctorSignup";
 
-function App() {
-  const [message, setMessage] = useState("");
+import "./styles/App.css";
 
-  useEffect(() => {
-    fetch("/api/message") // Send GET request to the backend
-      .then((response) => response.text()) // Parse the response as text
-      .then((data) => setMessage(data)) // Store the response in the state
-      .catch((error) => console.error("Error fetching data:", error)); // Handle any errors
-  }, []);
-
+const App = () => {
   return (
-    <div>
-      <h1>Backend Message:</h1>
-      <p>{message}</p> {/* Display the message */}
-    </div>
+    <Router>
+      <div>
+        <Routes>
+          {/* Signup page */}
+          <Route path="/signup" element={<Signup />} />
+
+          {/* Dashboard (post-login redirection) */}
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/doctorSignup" element={<DoctorSignup />} />
+          {/* Default route */}
+          <Route path="*" element={<Signup />} />
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
