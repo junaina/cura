@@ -1,0 +1,58 @@
+/* // styles / Navbar.css*/
+
+/* Navbar Styles */
+.navbar {
+    background: linear-gradient(to bottom right, #45B2EB 50%, #ffffff 100%); /* Gradient from blue to white */
+    color: white;
+    height: calc(100% - 20px); /* Ensure the navbar is slightly smaller vertically */
+    width: 220px; /* Smaller width */
+    border-radius: 10px; /* Rounded corners */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    position: fixed; /* Fixed on the left side */
+    top: 10px;
+    left: 10px;
+  }
+  
+  /* Small Rectangle Container Above "Cura" Text */
+  .navbar .brand-rectangle {
+    background-color: white; /* White background for the rectangle */
+    width: 45px; /* Width of the small rectangle */
+    height: 10px; /* Height of the small rectangle */
+    border-radius: 0px; /* Rounded corners */
+    margin-bottom: 0px; /* Margin below the rectangle */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional soft shadow */
+    display: flex;
+    justify-content: center; /* Center content inside */
+    align-items: center; /* Align content vertically */
+  }
+  
+  /* Brand Text Styles */
+  .navbar .brand {
+    font-size: 1.8rem;
+    margin-top: 0px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 24px; /* Margin below the brand text */
+  }
+  
+  /* Navbar List Items */
+  .navbar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .navbar ul li {
+    font-size: 1.125rem; /* Medium text size */
+    margin-bottom: 18px;
+    cursor: pointer;
+    transition: font-weight 0.3s ease;
+    color: #ffffff;
+  }
+  
+  .navbar ul li:hover {
+    font-weight: 600;
+  }
+  

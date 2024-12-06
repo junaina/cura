@@ -1,0 +1,213 @@
+/* // styles/ AdminDashboard.css*/
+
+/* Admin Dashboard Styles */
+.admin-dashboard {
+  display: flex;
+  flex-direction: row;
+  margin-left: 240px; /* Adjust for Navbar */
+  padding: 20px;
+  background-color: #45B2EB; /* Light blue background */
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.main-content {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Welcome Section */
+.welcome-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Two columns: left for Hello Admin, right for Appointments */
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+/* Left Section (Hello Admin) */
+.hello-admin {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.hello-admin h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-left: 200px;
+  margin-bottom: 5px; /* Reduced margin */
+}
+
+.hello-admin p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-left: 200px;
+  margin-bottom: 10px; /* Adjusted margin */
+}
+
+.profile-pic {
+  width: 200px; /* Increased width */
+  height: 200px; /* Increased height */
+  border-radius: 50%; /* Circular shape */
+  background-color: #ccc; /* Placeholder color */
+  margin-top: 10px;
+  margin-left: 50px; /* Added left margin */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+/* Date Section */
+.date {
+  font-size: 1.1rem;
+  color: #777;
+  margin-top: 0; /* Removed extra margin */
+}
+/* Right Section (Appointments) */
+/* Right Section (Appointments) */
+/* Right Section (Appointments) */
+.appointments {
+  background-color: #E0F7FF; /* Light blue background */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.appointments h2 {
+  font-size: 1.6rem; /* Adjusted font size for better fit */
+  font-weight: bold; /* Bolder text */
+  color: white; /* White text color */
+  margin-bottom: 16px;
+}
+
+.appointments button {
+  background-color: #4C9BFD; /* Blue background */
+  color: white;
+  padding: 8px 20px; /* Smaller button size */
+  border-radius: 25px; /* Fully rounded button */
+  font-size: 1.1rem; /* Font size for button */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+}
+
+.appointments button:hover {
+  background-color: #45A0D1; /* Darker blue on hover */
+}
+
+
+/* Appointments Container - Blue outer wrapper */
+.appointments-container {
+  background-color: #45B2EB;
+  border-radius: 12px;
+  padding: 24px;
+  margin-top: 32px;
+ /* height: calc(80vh - 70px);*/
+}
+
+/* Appointments Table Section - White inner container */
+.appointments-table-section {
+  background-color: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.appointments-table-section h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  height: 100%; 
+  border-bottom: 1px solid #eee;
+}
+
+.appointments-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.appointments-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.appointments-table th,
+.appointments-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.appointments-table th {
+  font-weight: 600;
+  color: #666;
+  background-color: #f8f9fa;
+}
+
+.appointments-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.pagination-button {
+  padding: 8px 16px;
+  border: none;
+  background-color: #4C9BFD;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-button:hover:not(:disabled) {
+  background-color: #45A0D1;
+}
+
+.pagination-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.page-info {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .appointments-table {
+    overflow-x: auto;
+  }
+  
+  .appointments-table table {
+    min-width: 600px;
+  }
+}
+

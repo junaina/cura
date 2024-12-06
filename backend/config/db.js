@@ -1,4 +1,7 @@
+// db.js 
 const mongoose = require("mongoose");
+
+mongoose.pluralize(null);
 
 const connectDB = async () => {
   try {
