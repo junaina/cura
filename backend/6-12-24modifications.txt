@@ -1,0 +1,27 @@
+List of Modified Files and Changes
+
+1. models/Doctor.js
+Added the isApproved field:
+
+isApproved: { type: Boolean, default: false }, // Added to indicate approval status
+2. routes/User.js
+Modified /login route:
+Added a check to verify if the doctor is approved before allowing login.
+New logic:
+
+if (user.role === "doctor") {
+  const doctor = await Doctor.findOne({ user_id: user._id });
+  if (!doctor) {
+    return res.status(404).json({ message: "Doctor profile not found." });
+  }
+  if (!doctor.isApproved) {
+    return res.status(403).json({ message: "Account pending approval." });
+  }
+}
+
+
+3. routes/Admin.js 
+We drafted new routes for admin functionality:
+Fetch pending doctors (/pending-doctors).
+Approve a doctor (/approve-doctor/:id).
+Reject a doctor (/reject-doctor/:id).

@@ -36,6 +36,7 @@ app.use("/api/doctor", doctorRoutes); // Add Doctor routes
 
 // Routes
 app.use("/api/users", userRoutes);
+app.use("/api/user", userRoutes); // This registers all routes from User.js under /api/user
 
 // Start server
 const PORT = process.env.PORT || 5000;

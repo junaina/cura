@@ -140,6 +140,7 @@ router.post("/signup", async (req, res) => {
       gender,
       dob,
       about,
+      isApproved: false, // New field added
     });
     await newDoctor.save();
 

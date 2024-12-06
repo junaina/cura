@@ -5,13 +5,14 @@ require("dotenv").config();
 
 const passport = require("passport");
 const User = require("../models/User");
+const Doctor = require("../models/Doctor");
 
 const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET;
 // POST /api/user/login
-
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
+  console.log("Incoming request to /login:", req.body);
 
   try {
     const user = await User.findOne({ email });
@@ -20,8 +21,7 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    console.log("Password from request:", password);
-    console.log("Hashed password from DB:", user.password);
+    console.log("User found:", user);
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     console.log("Password valid:", isPasswordValid);
@@ -30,22 +30,29 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    // Generate JWT token
-    const token = jwt.sign(
-      { id: user._id, role: user.role }, // Payload
-      process.env.JWT_SECRET, // Secret key from .env file
-      { expiresIn: "1d" } // Token expiry (1 day)
-    );
+    if (user.role === "doctor") {
+      const doctor = await Doctor.findOne({ user_id: user._id });
+      console.log("Doctor found:", doctor);
 
-    console.log("JWT Token:", token);
+      if (!doctor) {
+        return res.status(404).json({ message: "Doctor profile not found." });
+      }
+      if (!doctor.isApproved) {
+        return res.status(403).json({ message: "Account pending approval." });
+      }
+    }
+
+    const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, {
+      expiresIn: "1d",
+    });
 
     res.json({
       message: "Login successful",
-      token, // Include token in response
-      role: user.role, // Include role for frontend use
+      token,
+      role: user.role,
     });
   } catch (err) {
-    console.error("Error in /login route:", err);
+    console.error("Error in /login route:", err.message, err.stack);
     res.status(500).json({ message: "Internal server error" });
   }
 });

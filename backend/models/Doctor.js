@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const doctorSchema = new mongoose.Schema({
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
@@ -12,8 +13,9 @@ const doctorSchema = new mongoose.Schema({
   contactNumber: { type: String, required: true },
   city: { type: String, required: true },
   gender: { type: String },
-  dob: { type: Date, required: true }, // Newly added field
+  dob: { type: Date, required: true },
   about: { type: String },
+  isApproved: { type: Boolean, default: false }, // Approval field added
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
 });
