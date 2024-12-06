@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import DoctorSignup from "./pages/DoctorSignup";
-
+import Login from "./pages/Login";
 import "./styles/App.css";
 
 const App = () => {
@@ -17,6 +17,7 @@ const App = () => {
           {/* Dashboard (post-login redirection) */}
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/doctorSignup" element={<DoctorSignup />} />
+          <Route path="/login" element={<Login />} />
           {/* Default route */}
           <Route path="*" element={<Signup />} />
         </Routes>

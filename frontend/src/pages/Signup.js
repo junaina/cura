@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import image2 from "../assets/register-page/google-logo.png";
 import axios from "axios";
 import "../styles/Signup.css";
-import { doctorSignup } from "../pages/DoctorSignup";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
