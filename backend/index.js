@@ -3,6 +3,8 @@ const dotenv = require("dotenv");
 const passport = require("passport");
 const connectDB = require("./config/db");
 const userRoutes = require("./routes/User");
+const doctorRoutes = require("./routes/Doctor"); // Import Doctor routes
+
 const cors = require("cors");
 
 // Load environment variables
@@ -25,6 +27,12 @@ app.use(
 // Middleware
 app.use(express.json());
 require("./config/passport")(passport);
+app.use((req, res, next) => {
+  console.log(`Request received: ${req.method} ${req.path}`);
+  next();
+});
+
+app.use("/api/doctor", doctorRoutes); // Add Doctor routes
 
 // Routes
 app.use("/api/users", userRoutes);

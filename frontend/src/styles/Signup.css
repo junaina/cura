@@ -186,6 +186,12 @@ input {
   font-weight: 500;
 }
 
+.error-message {
+  color: red;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
 /* Responsive styling */
 @media (max-width: 768px) {
   .signup-container {

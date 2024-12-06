@@ -1,10 +1,54 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
+
 const passport = require("passport");
 const User = require("../models/User");
 
 const router = express.Router();
+const JWT_SECRET = process.env.JWT_SECRET;
+// POST /api/user/login
+
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      console.log("User not found for email:", email);
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    console.log("Password from request:", password);
+    console.log("Hashed password from DB:", user.password);
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    console.log("Password valid:", isPasswordValid);
+
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { id: user._id, role: user.role }, // Payload
+      process.env.JWT_SECRET, // Secret key from .env file
+      { expiresIn: "1d" } // Token expiry (1 day)
+    );
+
+    console.log("JWT Token:", token);
+
+    res.json({
+      message: "Login successful",
+      token, // Include token in response
+      role: user.role, // Include role for frontend use
+    });
+  } catch (err) {
+    console.error("Error in /login route:", err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
 
 // Email/Password Signup
 router.post("/signup", async (req, res) => {

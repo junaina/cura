@@ -81,3 +81,7 @@ button {
 .submit-button:hover {
   background-color: #359acb;
 }
+.error-field {
+  border: 2px solid red;
+  background-color: #ffe6e6;
+}

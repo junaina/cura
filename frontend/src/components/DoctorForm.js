@@ -1,6 +1,6 @@
 import React from "react";
 
-const DoctorForm = ({ formData, handleChange, handleFileChange }) => {
+const DoctorForm = ({ formData, handleChange, errors }) => {
   return (
     <div className="doctor-form">
       <h1 className="doctor-form-header">Sign Up as a Doctor</h1>
@@ -13,6 +13,7 @@ const DoctorForm = ({ formData, handleChange, handleFileChange }) => {
             value={formData.firstName}
             onChange={handleChange}
             required
+            className={errors.firstName ? "error-field" : ""}
           />
           <input
             type="text"
@@ -21,6 +22,7 @@ const DoctorForm = ({ formData, handleChange, handleFileChange }) => {
             value={formData.lastName}
             onChange={handleChange}
             required
+            className={errors.lastName ? "error-field" : ""}
           />
         </div>
         <input
@@ -31,11 +33,13 @@ const DoctorForm = ({ formData, handleChange, handleFileChange }) => {
           onChange={handleChange}
           required
         />
+
         <select
           name="gender"
           value={formData.gender}
           onChange={handleChange}
           required
+          className={errors.gender ? "error-field" : ""}
         >
           <option value="">Gender</option>
           <option value="male">Male</option>
@@ -49,6 +53,7 @@ const DoctorForm = ({ formData, handleChange, handleFileChange }) => {
           value={formData.contactNumber}
           onChange={handleChange}
           required
+          className={errors.contactNumber ? "error-field" : ""}
         />
         <input
           type="email"
@@ -57,6 +62,7 @@ const DoctorForm = ({ formData, handleChange, handleFileChange }) => {
           value={formData.email}
           onChange={handleChange}
           required
+          className={errors.email ? "error-field" : ""}
         />
         <input
           type="password"
@@ -65,6 +71,7 @@ const DoctorForm = ({ formData, handleChange, handleFileChange }) => {
           value={formData.password}
           onChange={handleChange}
           required
+          className={errors.password ? "error-field" : ""}
         />
         <input
           type="text"
@@ -73,6 +80,7 @@ const DoctorForm = ({ formData, handleChange, handleFileChange }) => {
           value={formData.specialization}
           onChange={handleChange}
           required
+          className={errors.specialization ? "error-field" : ""}
         />
         <input
           type="text"
@@ -81,6 +89,7 @@ const DoctorForm = ({ formData, handleChange, handleFileChange }) => {
           value={formData.medicalLicenseNumber}
           onChange={handleChange}
           required
+          className={errors.medicalLicenseNumber ? "error-field" : ""}
         />
         <input
           type="number"
@@ -89,6 +98,7 @@ const DoctorForm = ({ formData, handleChange, handleFileChange }) => {
           value={formData.experience}
           onChange={handleChange}
           required
+          className={errors.experience ? "error-field" : ""}
         />
         <input
           type="text"
@@ -97,6 +107,7 @@ const DoctorForm = ({ formData, handleChange, handleFileChange }) => {
           value={formData.city}
           onChange={handleChange}
           required
+          className={errors.city ? "error-field" : ""}
         />
         <textarea
           name="about"
@@ -104,6 +115,7 @@ const DoctorForm = ({ formData, handleChange, handleFileChange }) => {
           value={formData.about}
           onChange={handleChange}
           required
+          className={errors.about ? "error-field" : ""}
         />
       </form>
     </div>
