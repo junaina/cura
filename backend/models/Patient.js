@@ -1,23 +1,14 @@
 const mongoose = require("mongoose");
 
 const patientSchema = new mongoose.Schema({
-  user_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
-  date_of_birth: { type: Date, required: true },
-  gender: { type: String, enum: ["Male", "Female", "Other"], required: true },
-  contact_number: { type: String, required: true },
-  medical_history: [
-    {
-      condition: { type: String, required: true },
-      date_diagnosed: { type: Date },
-    },
-  ],
-  appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Appointment" }],
+  _id: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  contact_number: { type: String, default: "" }, // Make optional or add a default value
+  gender: { type: String, enum: ["male", "female", "other"], default: "other" }, // Default value
+  date_of_birth: { type: Date, default: null }, // Default value
+  address: { type: String, default: "" },
   created_at: { type: Date, default: Date.now },
-  updated_at: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model("Patient", patientSchema);

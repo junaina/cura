@@ -1,0 +1,50 @@
+.approve-doctor-card {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(
+    135deg,
+    #d6e9ff,
+    #b3d7ff
+  ); /* Gradient background */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  width: 100%;
+  max-width: 300px; /* Adjust based on your layout */
+  margin: 0; /* Center the card */
+  background: rgba(255, 255, 255, 0.27);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.3px);
+  -webkit-backdrop-filter: blur(5.3px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.approve-doctor-title {
+  font-size: 35px;
+  font-weight: bold;
+  color: #ffff;
+  margin-bottom: 15px;
+}
+
+.approve-doctor-button {
+  background-color: #45b2eb;
+  color: #fff;
+  padding: 20px 20px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  width: 60%;
+}
+
+.approve-doctor-button:hover {
+  background-color: #0056d6;
+}

@@ -1,0 +1,47 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  width: 15%; /* Retain original width */
+  height: 94%; /* Retain original height */
+  background: rgba(255, 255, 255, 0.27);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.3px);
+  -webkit-backdrop-filter: blur(5.3px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 2px 0px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Optional subtle border */
+  padding: 20px 10px;
+  flex-wrap: wrap;
+}
+
+.logo h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #0056d6;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  justify-items: center;
+  text-align: center;
+}
+
+.nav-link {
+  display: block;
+  padding: 10px 15px;
+  font-size: 16px;
+  color: #f0f0f0;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-link:hover {
+  background-color: rgba(214, 233, 255, 0.5); /* Light frosted hover effect */
+}

@@ -1,0 +1,27 @@
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align text to the left */
+  position: relative;
+  align-self: center;
+  margin-top: 25px;
+}
+
+.logo-line {
+  width: 50px; /* Adjust width as needed */
+  height: 15px; /* Thickness of the line */
+  background-color: white; /* Line color */
+  margin-bottom: -10px; /* Adjust to position the line closer to text */
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
+  border-radius: 0;
+}
+
+.logo-text {
+  font-size: 58px; /* Adjust font size */
+  margin-top: 0px;
+  font-weight: bold;
+  color: white; /* Text color */
+  text-transform: lowercase; /* Ensure 'cura' stays lowercase */
+  font-family: "Lexend", sans-serif; /* Use a modern sans-serif font */
+  text-shadow: 4px 1px 4px rgba(80, 80, 80, 0.3); /* Optional text shadow */
+}

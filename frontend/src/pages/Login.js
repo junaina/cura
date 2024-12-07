@@ -30,11 +30,19 @@ const Login = () => {
       );
       alert("Login successful!");
       console.log("JWT Token:", response.data.token);
-      // Store the token in local storage (or cookies if preferred)
+
+      // Store the token and role in local storage
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("role", response.data.role);
-      // Redirect to dashboard or homepage
-      window.location.href = "/dashboard";
+
+      // Redirect based on role
+      if (response.data.role === "admin") {
+        window.location.href = "/admin-dashboard";
+      } else if (response.data.role === "doctor") {
+        window.location.href = "/doctor-dashboard";
+      } else {
+        window.location.href = "/patient-dashboard";
+      }
     } catch (error) {
       setError(error.response?.data?.message || "Login failed");
     }

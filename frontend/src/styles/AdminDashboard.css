@@ -1,0 +1,31 @@
+.admin-dashboard {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  background: rgb(69, 178, 235);
+  background: linear-gradient(
+    103deg,
+    rgba(69, 178, 235, 1) 26%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  border-radius: 15px;
+  height: 100vh;
+  scrollbar-face-color: transparent;
+}
+
+.dashboard-content {
+  padding: 20px;
+  flex: 1;
+  background-color: #45b2eb;
+  border-radius: 15px;
+  flex-direction: row;
+  display: flex;
+  gap: 20px;
+}
+.card-container {
+  margin-left: 0;
+  width: fit-content;
+  height: 45%;
+  display: flex;
+  padding: 0;
+}

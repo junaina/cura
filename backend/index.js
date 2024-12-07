@@ -4,6 +4,7 @@ const passport = require("passport");
 const connectDB = require("./config/db");
 const userRoutes = require("./routes/User");
 const doctorRoutes = require("./routes/Doctor"); // Import Doctor routes
+const appointmentRoutes = require("./routes/Appointment"); // Import Appointment routes
 
 const cors = require("cors");
 const forgotPasswordRoutes = require("./routes/ForgotPassword");
@@ -40,6 +41,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/user", userRoutes); // This registers all routes from User.js under /api/user
 
 app.use("/api/user", forgotPasswordRoutes);
+app.use("/api/appointments", appointmentRoutes); // Route prefix
 
 // Start server
 const PORT = process.env.PORT || 5000;

@@ -6,9 +6,25 @@ require("dotenv").config();
 const passport = require("passport");
 const User = require("../models/User");
 const Doctor = require("../models/Doctor");
-
+const authMiddleware = require("../middlewares/adminauth");
 const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET;
+const Patient = require("../models/Patient");
+// Admin-specific /me route
+router.get("/me", authMiddleware, async (req, res) => {
+  try {
+    // Since adminauth has already validated the token and role, we can fetch the user details
+    const user = await User.findById(req.user.id).select("-password"); // Exclude password
+    if (!user) {
+      return res.status(404).json({ message: "Admin user not found" });
+    }
+    res.json(user);
+  } catch (error) {
+    console.error("Error fetching admin user info:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 // POST /api/user/login
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -62,21 +78,41 @@ router.post("/signup", async (req, res) => {
   const { name, email, password, role } = req.body;
 
   try {
+    // Check if user already exists
     const existingUser = await User.findOne({ email });
-    if (existingUser)
+    if (existingUser) {
       return res.status(400).json({ message: "Email already in use" });
+    }
 
+    // Hash the password
     const hashedPassword = await bcrypt.hash(password, 12);
 
+    // Create the user
     const newUser = new User({ name, email, password: hashedPassword, role });
     await newUser.save();
 
+    // If the user role is 'patient', also add to the `patients` collection
+    if (role === "patient") {
+      const newPatient = new Patient({
+        _id: newUser._id, // Use the same ID as the user
+        name: newUser.name,
+        email: newUser.email,
+        created_at: new Date(),
+      });
+      await newPatient.save();
+    }
+
+    // Respond with success
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
+    console.error("Error during signup:", error);
     res.status(500).json({ message: "Server error. Please try again later." });
   }
 });
 
+router.get("/admin-dashboard", authMiddleware, (req, res) => {
+  res.json({ message: "Welcome to the Admin Dashboard" });
+});
 // Google OAuth (Add to passport configuration)
 router.get(
   "/google",
