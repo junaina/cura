@@ -77,7 +77,9 @@ const Login = () => {
           </button>
           {error && <p className="login-error">{error}</p>}
         </form>
-
+        <a href="/forgot-password" className="forgot-password-link">
+          Forgot Password?
+        </a>
         <div className="login-divider">
           <hr />
           <span>OR</span>

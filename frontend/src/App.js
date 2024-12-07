@@ -5,6 +5,8 @@ import Dashboard from "./pages/Dashboard";
 import DoctorSignup from "./pages/DoctorSignup";
 import Login from "./pages/Login";
 import "./styles/App.css";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword"; // Import ResetPassword component
 
 const App = () => {
   return (
@@ -15,6 +17,9 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
 
           {/* Dashboard (post-login redirection) */}
+
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/doctorSignup" element={<DoctorSignup />} />
           <Route path="/login" element={<Login />} />
