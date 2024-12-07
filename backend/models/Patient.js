@@ -12,3 +12,4 @@ const patientSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Patient", patientSchema);
+//to-do: add more fields to the patient schema
