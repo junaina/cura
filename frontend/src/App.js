@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import DoctorSignup from "./pages/DoctorSignup";
-
 import "./styles/App.css";
+import DoctorDashboard from "./pages/DoctorDashboard";
 
 const App = () => {
   return (
@@ -12,13 +12,14 @@ const App = () => {
       <div>
         <Routes>
           {/* Signup page */}
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/" element={<DoctorDashboard />} />
 
-          {/* Dashboard (post-login redirection) */}
-          <Route path="/dashboard" element={<Dashboard />} />
+          
+          {/* <Route path="/signup" element={<Signup />} />
+           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/doctorSignup" element={<DoctorSignup />} />
-          {/* Default route */}
-          <Route path="*" element={<Signup />} />
+                    <Route path="*" element={<Signup />} />  */}
+
         </Routes>
       </div>
     </Router>

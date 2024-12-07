@@ -3,7 +3,8 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const Doctor = require("../models/Doctor");
 const Availability = require("../models/Availability");
-
+const Appointment = require("../models/Appointment");
+const Patient = require("../models/Patient");
 const router = express.Router();
 
 router.post("/signup", async (req, res) => {
@@ -185,6 +186,134 @@ router.post("/signup", async (req, res) => {
     console.error("Server error occurred:", error);
     res.status(500).json({ message: "Server error. Please try again later." });
   }
+
 });
+
+
+
+
+
+// warda code for getting doctor's appointemnt details
+// Create a new appointment
+router.post("/:doctorId/appointments", async (req, res) => {
+  const { doctorId } = req.params;
+  const { patient_id, date, time } = req.body;
+
+  try {
+    // Ensure doctor exists
+    const doctor = await Doctor.findById(doctorId);
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor not found" });
+    }
+
+    // Ensure patient exists
+    const patient = await Patient.findById(patient_id);
+    if (!patient) {
+      return res.status(404).json({ message: "Patient not found" });
+    }
+
+    // Create appointment
+    const newAppointment = new Appointment({
+      doctor_id: doctorId,
+      patient_id,
+      date,
+      time,
+      status: "pending", // Default status
+    });
+
+    await newAppointment.save();
+
+    // Add appointment to patient and doctor
+    patient.appointments.push(newAppointment._id);
+    doctor.appointments.push(newAppointment._id);
+    await patient.save();
+    await doctor.save();
+
+    res.status(201).json({ message: "Appointment created successfully", appointment: newAppointment });
+  } catch (error) {
+    console.error("Error creating appointment:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
+
+// Route to get appointments for a doctor
+router.get("/:doctorId/appointments", async (req, res) => {
+  const { doctorId } = req.params;
+
+  try {
+    // Find appointments for the given doctor and populate patient details
+    const appointments = await Appointment.find({ doctor_id: doctorId })
+      .populate("patient_id", "name date_of_birth medical_history") // Fetch selected fields from the Patient collection
+      .exec();
+
+    // Format response to include age and other patient details dynamically
+    const formattedAppointments = appointments.map((appt) => {
+      const patient = appt.patient_id;
+      const age = patient.date_of_birth
+        ? new Date().getFullYear() - new Date(patient.date_of_birth).getFullYear()
+        : null;
+
+      return {
+        _id: appt._id,
+        doctor_id: appt.doctor_id,
+        patient: {
+          name: patient.name,
+          age,
+          health_condition: patient.medical_history?.[0]?.condition || "N/A",
+        },
+        date: appt.date,
+        time: appt.time,
+        status: appt.status,
+        notes: appt.notes,
+      };
+    });
+
+    res.status(200).json({ appointments: formattedAppointments });
+  } catch (error) {
+    console.error("Error fetching appointments:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
+// Route to update appointment status
+router.patch("/appointments/:appointmentId", async (req, res) => {
+  const { appointmentId } = req.params;
+  const { status, notes } = req.body;
+
+  try {
+    // Find the appointment by ID
+    const appointment = await Appointment.findById(appointmentId);
+    if (!appointment) {
+      return res.status(404).json({ message: "Appointment not found" });
+    }
+
+    // Update fields
+    if (status) {
+      if (!["pending", "confirmed", "completed", "rescheduled"].includes(status)) {
+        return res.status(400).json({ message: `Invalid status value: ${status}` });
+      }
+      appointment.status = status;
+    }
+
+    if (notes) {
+      appointment.notes = notes;
+    }
+
+    appointment.updated_at = new Date();
+
+    // Save the updated appointment
+    await appointment.save();
+
+    res.status(200).json({ message: "Appointment updated successfully", appointment });
+  } catch (error) {
+    console.error("Error updating appointment:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
 
 module.exports = router;

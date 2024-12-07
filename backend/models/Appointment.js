@@ -8,14 +8,14 @@ const appointmentSchema = new mongoose.Schema({
   },
   patient_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Patient",
+    ref: "Patient", // Reference to the Patient collection
     required: true,
   },
   date: { type: Date, required: true },
   time: { type: String, required: true },
   status: {
     type: String,
-    enum: ["pending", "confirmed", "completed", "cancelled"],
+    enum: ["pending", "confirmed", "completed", "rescheduled"],
     required: true,
   },
   notes: { type: String },
