@@ -6,6 +6,7 @@ const userRoutes = require("./routes/User");
 const doctorRoutes = require("./routes/Doctor"); // Import Doctor routes
 
 const cors = require("cors");
+const forgotPasswordRoutes = require("./routes/ForgotPassword");
 
 // Load environment variables
 dotenv.config();
@@ -37,6 +38,8 @@ app.use("/api/doctor", doctorRoutes); // Add Doctor routes
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/user", userRoutes); // This registers all routes from User.js under /api/user
+
+app.use("/api/user", forgotPasswordRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5000;
