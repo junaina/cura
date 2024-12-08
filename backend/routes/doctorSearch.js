@@ -43,5 +43,29 @@ router.get("/search", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+// Get a single doctor's details by ID
+router.get("/:id", async (req, res) => {
+  const { id } = req.params; // Get the doctor ID from the URL
+  console.log(`Fetching doctor with ID: ${id}`); // Log the ID
 
+  try {
+    const doctor = await Doctor.findById(id)
+      .populate("user_id", "name email")
+      .populate({
+        path: "availability", // Populate availability field with availability data
+        model: "Availability", // Specify model to populate from
+        select: "day start_time end_time", // Select relevant fields from the Availability collection
+      });
+    if (!doctor) {
+      console.log("Doctor not found"); // Debugging log
+      return res.status(404).json({ msg: "Doctor not found" });
+    }
+    console.log("Doctor found:", doctor); // Log doctor data
+
+    res.json(doctor); // Return doctor details
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
+});
 module.exports = router;

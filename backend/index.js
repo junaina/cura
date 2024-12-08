@@ -6,9 +6,9 @@ const userRoutes = require("./routes/User");
 const doctorRoutes = require("./routes/Doctor"); // Import Doctor routes
 const appointmentRoutes = require("./routes/Appointment"); // Import Appointment routes
 const patientRoutes = require("./routes/Patient"); // Adjust path if needed
-const patientsSearch = require("./routes/doctorSearch"); // Import patient search routes
 const cors = require("cors");
 const forgotPasswordRoutes = require("./routes/ForgotPassword");
+const doctorSearchRoutes = require("./routes/doctorSearch"); // Import the doctor search routes
 
 // Load environment variables
 dotenv.config();
@@ -43,9 +43,10 @@ app.use("/api/user", userRoutes); // This registers all routes from User.js unde
 
 app.use("/api/user", forgotPasswordRoutes);
 app.use("/api/appointments", appointmentRoutes); // Route prefix
-
+app.use("/api/appointments", require("./routes/appointment"));
 app.use("/api/patients", patientRoutes); //this is for patient routes in the admin dashboard, not related to patient dashboard
 app.use("/api/patientSearch", require("./routes/doctorSearch"));
+app.use("/api/doctor", doctorSearchRoutes); // This should match the `GET /api/doctor/:id` route
 
 // Start server
 const PORT = process.env.PORT || 5000;

@@ -16,6 +16,8 @@ import PatientHome from "./pages/PatientHome"; // Import PatientDashboard
 import DoctorApplications from "./pages/DoctorApplications"; // Import DoctorApplications
 import ManageDoctors from "./components/ManageDoctors"; // Import ManageDoctors component
 import ManagePatients from "./pages/ManagePatients"; // Import ManagePatients component
+import DoctorSearchResults from "./pages/DoctorSearchResults"; // Import the new DoctorSearchResults component
+import DoctorProfile from "./pages/DoctorProfile"; // Import the doctor profile page
 
 import "./styles/App.css";
 
@@ -35,7 +37,6 @@ const App = () => {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/doctorSignup" element={<DoctorSignup />} />
-
           {/* Role-Based Routes */}
           <Route
             path="/admin-dashboard"
@@ -88,7 +89,6 @@ const App = () => {
               )
             }
           />
-
           {/* Route for Manage Doctors */}
           <Route
             path="/manage-patient-records"
@@ -100,6 +100,9 @@ const App = () => {
               )
             }
           />
+          <Route path="/doctor-search" element={<DoctorSearchResults />} />
+          <Route path="/doctor-profile/:id" element={<DoctorProfile />} />{" "}
+          {/* Doctor Profile Route */}
           {/* Default Route */}
           <Route path="*" element={<Navigate to="/signup" replace />} />
         </Routes>

@@ -1,0 +1,51 @@
+/* Styles for Doctor Search Results Page */
+.search-results {
+  padding: 20px;
+}
+
+.search-results h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.doctor-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.doctor-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 10px;
+  width: 300px;
+  text-align: center;
+}
+
+.doctor-card-header h3 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.doctor-card-body p {
+  font-size: 14px;
+  color: #555;
+}
+
+.view-profile-btn {
+  background-color: #1e90ff;
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.view-profile-btn:hover {
+  background-color: #0056b3;
+}

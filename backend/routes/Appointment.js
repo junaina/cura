@@ -34,5 +34,29 @@ router.get("/doctor/:id", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+// Route for creating an appointment
+router.post("/", async (req, res) => {
+  const { doctor_id, patient_id, date, time } = req.body;
+
+  if (!doctor_id || !patient_id || !date || !time) {
+    return res.status(400).json({ msg: "Missing required fields" });
+  }
+
+  try {
+    const newAppointment = new Appointment({
+      doctor_id,
+      patient_id,
+      date,
+      time,
+      status: "pending",
+    });
+
+    const savedAppointment = await newAppointment.save();
+    res.status(201).json(savedAppointment);
+  } catch (err) {
+    console.error("Error creating appointment:", err);
+    res.status(500).json({ msg: "Error creating appointment" });
+  }
+});
 
 module.exports = router;

@@ -11,7 +11,7 @@ const appointmentSchema = new mongoose.Schema({
     ref: "Patient",
     required: true,
   },
-  date: { type: Date, required: true },
+  date: { type: String, required: true }, // Store the day as a string
   time: { type: String, required: true },
   status: {
     type: String,

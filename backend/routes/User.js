@@ -66,6 +66,7 @@ router.post("/login", async (req, res) => {
       message: "Login successful",
       token,
       role: user.role,
+      patient_id: user._id, // Add patient_id (_id) to the response
     });
   } catch (err) {
     console.error("Error in /login route:", err.message, err.stack);

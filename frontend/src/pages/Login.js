@@ -34,7 +34,9 @@ const Login = () => {
       // Store the token and role in local storage
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("role", response.data.role);
-
+      if (response.data.role === "patient") {
+        localStorage.setItem("patient_id", response.data.patient_id); // Store the patient_id from the backend
+      }
       // Redirect based on role
       if (response.data.role === "admin") {
         window.location.href = "/admin-dashboard";
