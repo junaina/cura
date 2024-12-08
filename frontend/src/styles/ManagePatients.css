@@ -1,0 +1,112 @@
+.manage-patients-page {
+  display: flex;
+  background-color: #45b2eb;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  height: 98vh;
+  padding: 10px;
+}
+
+.manage-patients-container {
+  z-index: 1;
+  padding: 20px;
+  background: white;
+  border-radius: 15px;
+  width: 80%;
+  margin-top: 20px;
+  margin: 10px;
+}
+
+.search-bar {
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 96%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.patients-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.patients-table th,
+.patients-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.patients-table th {
+  background-color: #45b2eb;
+  color: white;
+}
+
+.view-btn {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.update-btn {
+  background-color: #ffc107;
+  color: black;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+/* Modal container */
+.update-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal content */
+.patient-modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 1000px;
+  max-height: 90vh;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  overflow-y: auto; /* Allows scrolling if content exceeds max height */
+}
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+/* Optional: Style for buttons inside the modal */
+button {
+  margin: 5px;
+}
+
+.cancel-button {
+  background-color: #f44336;
+  color: white;
+}

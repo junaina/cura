@@ -22,5 +22,17 @@ router.get("/all", adminAuthMiddleware, async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+router.get("/doctor/:id", async (req, res) => {
+  try {
+    const doctor = await Doctor.findById(req.params.id); // Find doctor by ID
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor not found" });
+    }
+    res.json(doctor);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 module.exports = router;

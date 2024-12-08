@@ -14,7 +14,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/manage-doctors" className="nav-link">
+          <Link to="/doctor-management" className="nav-link">
             Manage Doctors
           </Link>
         </li>
@@ -26,11 +26,6 @@ const Navbar = () => {
         <li>
           <Link to="/manage-doctors" className="nav-link">
             Manage Doctor Applications
-          </Link>
-        </li>
-        <li>
-          <Link to="/view-analytics" className="nav-link">
-            View Analytics
           </Link>
         </li>
       </ul>

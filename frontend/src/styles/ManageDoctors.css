@@ -1,0 +1,123 @@
+.manage-doctors-page {
+  display: flex;
+  background-color: #45b2eb;
+  flex-direction: row;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  height: 98vh;
+}
+.manage-doctors {
+  width: 100%;
+  max-width: 1200px;
+  flex-direction: column;
+  margin: 0 auto;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #45b2eb;
+  border-radius: 10px;
+}
+
+/* Title */
+.manage-doctors h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+/* Search and Filter Container */
+.manage-doctors .filters {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+/* Search Bar */
+.manage-doctors input[type="text"] {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 250px;
+  max-width: 100%;
+  transition: border 0.3s ease;
+}
+
+.manage-doctors input[type="text"]:focus {
+  border-color: #4caf50; /* Highlight the border on focus */
+}
+
+/* Specialization Filter Dropdown */
+.manage-doctors select {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+  width: 200px;
+  max-width: 100%;
+}
+
+/* Grid Layout for Doctor Cards */
+.doctor-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+/* Pagination Styling */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+/* Center the modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  width: 500px;
+  max-width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.modal-content h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+/* Close Button in the Modal */
+.modal-content button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ff4747;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background-color: #ff2b2b;
+}

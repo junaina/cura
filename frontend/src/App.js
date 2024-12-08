@@ -14,6 +14,8 @@ import AdminDashboard from "./pages/AdminDashboard"; // Import AdminDashboard
 import DoctorDashboard from "./pages/DoctorDashboard"; // Import DoctorDashboard
 import PatientDashboard from "./pages/PatientDashboard"; // Import PatientDashboard
 import DoctorApplications from "./pages/DoctorApplications"; // Import DoctorApplications
+import ManageDoctors from "./components/ManageDoctors"; // Import ManageDoctors component
+import ManagePatients from "./pages/ManagePatients"; // Import ManagePatients component
 
 import "./styles/App.css";
 
@@ -70,6 +72,29 @@ const App = () => {
             element={
               getRole() === "admin" ? (
                 <DoctorApplications />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
+          />
+          {/* Route for Manage Doctors */}
+          <Route
+            path="/doctor-management"
+            element={
+              getRole() === "admin" ? (
+                <ManageDoctors />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
+          />
+
+          {/* Route for Manage Doctors */}
+          <Route
+            path="/manage-patient-records"
+            element={
+              getRole() === "admin" ? (
+                <ManagePatients />
               ) : (
                 <Navigate to="/login" replace />
               )

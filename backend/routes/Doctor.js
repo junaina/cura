@@ -4,6 +4,7 @@ const User = require("../models/User");
 const Doctor = require("../models/Doctor");
 const Availability = require("../models/Availability");
 const adminAuth = require("../middlewares/adminauth");
+const Appointment = require("../models/Appointment");
 const router = express.Router();
 
 router.post("/signup", async (req, res) => {
@@ -247,6 +248,146 @@ router.put("/:id/status", adminAuth, async (req, res) => {
   } catch (err) {
     console.error("Error updating doctor status:", err);
     res.status(500).json({ message: "Failed to update doctor status" });
+  }
+});
+// Fetch all approved doctors
+// Fetch all approved doctors with name and email
+// Fetch all approved doctors with availability and appointments
+// Fetch all approved doctors with availability and appointments
+router.get("/approved", async (req, res) => {
+  try {
+    // Fetch approved doctors
+    const approvedDoctors = await Doctor.find({ status: "approved" })
+      .populate("user_id", "name email")
+      .lean();
+
+    // Fetch availability for approved doctors
+    const doctorIds = approvedDoctors.map((doc) => doc._id);
+    const availabilities = await Availability.find({
+      doctor_id: { $in: doctorIds },
+    }).lean();
+
+    // Merge availability into doctors
+    const doctorsWithAvailability = approvedDoctors.map((doc) => {
+      doc.availability = availabilities.filter(
+        (avail) => String(avail.doctor_id) === String(doc._id)
+      );
+      return doc;
+    });
+
+    console.log("Doctors with Availability Merged:", doctorsWithAvailability);
+
+    res.status(200).json(doctorsWithAvailability);
+  } catch (err) {
+    console.error("Error fetching approved doctors:", err);
+    res.status(500).json({ message: "Failed to fetch approved doctors" });
+  }
+});
+
+// Fetch doctors filtered by specialization (with name and email)
+// Fetch doctors filtered by specialization (with name and email)
+router.get("/", async (req, res) => {
+  try {
+    const { specialization } = req.query; // Extract specialization filter
+    const filter = { status: "approved" }; // Default filter: approved doctors
+
+    if (specialization) {
+      filter.specialization = specialization; // Add specialization filter if provided
+    }
+
+    // Fetch doctors based on the filter
+    const doctors = await Doctor.find(filter)
+      .populate("user_id", "name email") // Populate user details (name and email)
+      .populate("specialization") // Optionally, populate specialization
+      .lean(); // Convert documents to plain JavaScript objects
+
+    console.log("Doctors Fetched:", doctors); // Debug log to check fetched doctors
+
+    // Fetch availability for the filtered doctors
+    const doctorIds = doctors.map((doc) => doc._id);
+    const availabilities = await Availability.find({
+      doctor_id: { $in: doctorIds },
+    }).lean();
+
+    console.log("Availabilities Fetched:", availabilities); // Debug log for availability
+
+    // Fetch appointments for the filtered doctors
+    const appointments = await Appointment.find({
+      doctor_id: { $in: doctorIds },
+    }).lean();
+
+    console.log("Appointments Fetched:", appointments); // Debug log for appointments
+
+    // Merge availability and appointments into the doctors data
+    const doctorsWithAvailabilityAndAppointments = doctors.map((doc) => {
+      doc.availability = availabilities.filter(
+        (avail) => String(avail.doctor_id) === String(doc._id)
+      );
+      doc.appointments = appointments.filter(
+        (appoint) => String(appoint.doctor_id) === String(doc._id)
+      );
+      return doc;
+    });
+
+    console.log(
+      "Doctors with Merged Availability and Appointments:",
+      doctorsWithAvailabilityAndAppointments
+    ); // Debug log for merged data
+
+    // Return the merged data
+    res.status(200).json(doctorsWithAvailabilityAndAppointments);
+  } catch (error) {
+    console.error("Error fetching doctors:", error);
+    res.status(500).json({ message: "Error fetching doctors", error });
+  }
+});
+
+// Fetch doctor details along with name, email, availability, and appointments
+router.get("/:id", async (req, res) => {
+  try {
+    const doctor = await Doctor.findById(req.params.id)
+      .populate("user_id", "name email") // Populate user details (name and email)
+      .populate("specialization") // Optionally, populate specialization
+      .populate("appointments") // Populate appointments
+      .populate("availability"); // Populate availability slots
+
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor not found" });
+    }
+
+    res.status(200).json(doctor);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching doctor details", error });
+  }
+});
+
+// Update a doctor
+router.put("/:id", async (req, res) => {
+  try {
+    const updatedDoctor = await Doctor.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    if (!updatedDoctor) {
+      return res.status(404).json({ message: "Doctor not found" });
+    }
+    res.status(200).json(updatedDoctor);
+  } catch (error) {
+    res.status(500).json({ message: "Error updating doctor", error });
+  }
+});
+
+// Delete a doctor
+router.delete("/:id", async (req, res) => {
+  try {
+    const deletedDoctor = await Doctor.findByIdAndDelete(req.params.id);
+    if (!deletedDoctor) {
+      return res.status(404).json({ message: "Doctor not found" });
+    }
+    res.status(200).json({ message: "Doctor deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting doctor", error });
   }
 });
 
