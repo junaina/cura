@@ -9,7 +9,7 @@ const Navbar = () => {
       <Logo />
       <ul className="nav-links">
         <li>
-          <Link to="/dashboard" className="nav-link">
+          <Link to="/admin-dashboard" className="nav-link">
             Dashboard
           </Link>
         </li>
@@ -24,7 +24,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/manage-doctor-applications" className="nav-link">
+          <Link to="/manage-doctors" className="nav-link">
             Manage Doctor Applications
           </Link>
         </li>

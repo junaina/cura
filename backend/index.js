@@ -34,7 +34,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/doctor", doctorRoutes); // Add Doctor routes
+app.use("/api/doctors", doctorRoutes); // Add Doctor routes
 
 // Routes
 app.use("/api/users", userRoutes);

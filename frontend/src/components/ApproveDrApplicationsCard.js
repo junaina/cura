@@ -3,8 +3,7 @@ import "../styles/ApproveDrApplicationsCard.css";
 
 const ApproveDrApplicationsCard = () => {
   const handleClick = () => {
-    // Logic for handling the button click (e.g., navigate to approval page)
-    window.location.href = "/manage-doctor-applications"; // Replace with your actual route
+    window.location.href = "/manage-doctors"; // Replace with your actual route
   };
 
   return (

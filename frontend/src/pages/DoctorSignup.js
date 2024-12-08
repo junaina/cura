@@ -134,7 +134,7 @@ const DoctorSignup = () => {
       console.log("Payload being sent to backend:", payload);
 
       const response = await axios.post(
-        "http://localhost:5000/api/doctor/signup",
+        "http://localhost:5000/api/doctors/signup",
         payload,
         {
           headers: {

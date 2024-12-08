@@ -13,6 +13,8 @@ import ResetPassword from "./pages/ResetPassword";
 import AdminDashboard from "./pages/AdminDashboard"; // Import AdminDashboard
 import DoctorDashboard from "./pages/DoctorDashboard"; // Import DoctorDashboard
 import PatientDashboard from "./pages/PatientDashboard"; // Import PatientDashboard
+import DoctorApplications from "./pages/DoctorApplications"; // Import DoctorApplications
+
 import "./styles/App.css";
 
 const App = () => {
@@ -63,7 +65,16 @@ const App = () => {
               )
             }
           />
-
+          <Route
+            path="/manage-doctors"
+            element={
+              getRole() === "admin" ? (
+                <DoctorApplications />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
+          />
           {/* Default Route */}
           <Route path="*" element={<Navigate to="/signup" replace />} />
         </Routes>

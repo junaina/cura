@@ -1,0 +1,125 @@
+.doctor-applications-page {
+  display: flex;
+  background-color: #45b2eb;
+  flex-direction: row;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  height: 98vh;
+}
+.doctor-applications-container {
+  z-index: 1;
+  padding: 20px;
+  background: white;
+  border-radius: 15px;
+  width: 100%;
+  height: 90vh;
+
+  margin-right: 1%;
+}
+
+.doctor-applications-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.doctor-applications-table th,
+.doctor-applications-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.doctor-applications-table th {
+  background-color: #45b2eb;
+  color: white;
+}
+
+.approve-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.reject-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.name-button {
+  background-color: #45b2eb;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.doctor-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  width: 50%;
+}
+.modal-content h3 {
+  background-color: #45b2eb;
+  color: white;
+  margin-top: 0;
+  padding: 5px;
+  border-radius: 5px;
+}
+.close-modal {
+  float: right;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  margin-top: 0;
+  padding: 5px;
+  color: white;
+}
+.availability-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.availability-table th,
+.availability-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.availability-table th {
+  background-color: #45b2eb;
+  color: white;
+}
+
+.availability-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.navbar {
+  height: 90vh;
+  margin-left: 1%;
+}

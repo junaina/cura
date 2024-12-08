@@ -15,7 +15,12 @@ const doctorSchema = new mongoose.Schema({
   gender: { type: String },
   dob: { type: Date, required: true },
   about: { type: String },
-  isApproved: { type: Boolean, default: false }, // Approval field added
+  status: {
+    type: String,
+    enum: ["pending", "approved", "rejected"], // Explicit application states
+    default: "pending", // New doctors are "pending" by default
+  },
+  availability: [{ type: mongoose.Schema.Types.ObjectId, ref: "Availability" }], // Add this
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
 });

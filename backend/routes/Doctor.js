@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const Doctor = require("../models/Doctor");
 const Availability = require("../models/Availability");
-
+const adminAuth = require("../middlewares/adminauth");
 const router = express.Router();
 
 router.post("/signup", async (req, res) => {
@@ -140,10 +140,10 @@ router.post("/signup", async (req, res) => {
       gender,
       dob,
       about,
-      isApproved: false, // New field added
+      status: "pending", // Default status for new doctor applications
     });
     await newDoctor.save();
-
+    console.log("here");
     // Handle availability slots
     if (slots && slots.length > 0) {
       console.log("Processing availability slots:", slots);
@@ -185,6 +185,68 @@ router.post("/signup", async (req, res) => {
   } catch (error) {
     console.error("Server error occurred:", error);
     res.status(500).json({ message: "Server error. Please try again later." });
+  }
+});
+// Route to fetch pending doctor applications
+router.get("/pending", adminAuth, async (req, res) => {
+  try {
+    const pendingDoctors = await Doctor.find({
+      status: "pending", // Fetch pending doctors
+    })
+      .populate("user_id", "name email") // Populate user details
+      .lean(); // Converts MongoDB documents to plain JavaScript objects
+
+    // Fetch availability for each doctor
+    const doctorIds = pendingDoctors.map((doc) => doc._id);
+    const availabilities = await Availability.find({
+      doctor_id: { $in: doctorIds },
+    }).lean();
+
+    // Merge availability data with doctors
+    const doctorsWithAvailability = pendingDoctors.map((doc) => {
+      doc.availability = availabilities.filter(
+        (avail) => String(avail.doctor_id) === String(doc._id)
+      );
+      return doc;
+    });
+
+    res.json(doctorsWithAvailability);
+  } catch (err) {
+    console.error("Error fetching pending doctors:", err);
+    res.status(500).json({ message: "Failed to fetch doctor applications" });
+  }
+});
+
+router.put("/:id/status", adminAuth, async (req, res) => {
+  const { status } = req.body; // Use 'status' instead of 'isApproved'
+  console.log("Incoming status:", status);
+
+  if (!["approved", "rejected"].includes(status)) {
+    return res.status(400).json({
+      message: "Invalid status value. Must be 'approved' or 'rejected'.",
+    });
+  }
+
+  try {
+    const updatedDoctor = await Doctor.findByIdAndUpdate(
+      req.params.id,
+      { status }, // Set the new status
+      { new: true } // Return the updated document
+    );
+    console.log("Updated doctor:", updatedDoctor);
+
+    // If doctor not found
+    if (!updatedDoctor) {
+      return res.status(404).json({ message: "Doctor not found." });
+    }
+
+    res.json({
+      message: "Doctor status updated successfully",
+      updatedDoctor,
+    });
+  } catch (err) {
+    console.error("Error updating doctor status:", err);
+    res.status(500).json({ message: "Failed to update doctor status" });
   }
 });
 
