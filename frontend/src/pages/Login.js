@@ -41,7 +41,7 @@ const Login = () => {
       } else if (response.data.role === "doctor") {
         window.location.href = "/doctor-dashboard";
       } else {
-        window.location.href = "/patient-dashboard";
+        window.location.href = "/patient-home";
       }
     } catch (error) {
       setError(error.response?.data?.message || "Login failed");

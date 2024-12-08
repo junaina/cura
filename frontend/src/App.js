@@ -12,7 +12,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import AdminDashboard from "./pages/AdminDashboard"; // Import AdminDashboard
 import DoctorDashboard from "./pages/DoctorDashboard"; // Import DoctorDashboard
-import PatientDashboard from "./pages/PatientDashboard"; // Import PatientDashboard
+import PatientHome from "./pages/PatientHome"; // Import PatientDashboard
 import DoctorApplications from "./pages/DoctorApplications"; // Import DoctorApplications
 import ManageDoctors from "./components/ManageDoctors"; // Import ManageDoctors component
 import ManagePatients from "./pages/ManagePatients"; // Import ManagePatients component
@@ -58,10 +58,10 @@ const App = () => {
             }
           />
           <Route
-            path="/patient-dashboard"
+            path="/patient-home"
             element={
               getRole() === "patient" ? (
-                <PatientDashboard />
+                <PatientHome />
               ) : (
                 <Navigate to="/login" replace />
               )
