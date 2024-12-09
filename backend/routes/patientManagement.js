@@ -6,6 +6,11 @@ const Prescription = require("../models/Prescription");
 
 // 1. Get Patient Profile
 router.get("/patient-profile/:patientId", async (req, res) => {
+  const { patientId } = req.params;
+  // Validate ObjectId
+  if (!mongoose.Types.ObjectId.isValid(patientId)) {
+    return res.status(400).json({ message: "Invalid patient ID" });
+  }
   try {
     const patient = await Patient.findById(req.params.patientId);
     if (!patient) {
@@ -102,12 +107,10 @@ router.put("/prescription/:prescriptionId", async (req, res) => {
       { medications, notes, updated_at: Date.now() },
       { new: true }
     );
-    res
-      .status(200)
-      .json({
-        message: "Prescription updated successfully",
-        updatedPrescription,
-      });
+    res.status(200).json({
+      message: "Prescription updated successfully",
+      updatedPrescription,
+    });
   } catch (err) {
     console.error("Error updating prescription:", err);
     res.status(500).json({ message: "Server error" });

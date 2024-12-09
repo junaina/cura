@@ -82,4 +82,132 @@
   background-color: #007bff;
   color: #fff;
   border-color: #007bff;
+} /* Modal Overlay */
+.patientinfo-appointment-modal {
+  top: 10px;
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1; /* Ensure it appears above other elements */
+  overflow: scroll;
+}
+
+/* Modal Content Container */
+.patientinfo-appointment-modal-content {
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff; /* White background for the modal */
+  border-radius: 8px;
+  padding: 20px;
+  width: 90%; /* Full-width on small screens */
+  max-width: 600px; /* Limit modal width on larger screens */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
+  animation: modalFadeIn 0.3s ease-in-out; /* Smooth fade-in animation */
+  position: relative;
+}
+
+/* Modal Header */
+.patientinfo-appointment-modal-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #007bff; /* Blue accent */
+  text-align: center;
+}
+
+/* Appointment Details */
+.patientinfo-appointment-modal-content p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Textarea Styling */
+.patientinfo-appointment-modal-content textarea {
+  width: 100%;
+  height: 80px;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: none; /* Disable resizing */
+}
+
+/* Prescription Section */
+.patientinfo-appointment-modal-prescription {
+  display: flex;
+  gap: 10px; /* Space between inputs */
+  margin-top: 10px;
+}
+
+.patientinfo-appointment-modal-prescription input {
+  flex: 1; /* Make all inputs equally wide */
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Buttons Section */
+.patientinfo-appointment-modal-btn {
+  margin-top: 10px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.patientinfo-appointment-modal-btn:hover {
+  opacity: 0.9;
+}
+
+.patientinfo-appointment-modal-btn.save {
+  background: #28a745; /* Green for save */
+  color: #fff;
+}
+
+.patientinfo-appointment-modal-btn.close {
+  background: #dc3545; /* Red for close */
+  color: #fff;
+}
+
+.patientinfo-appointment-modal-btn.add {
+  background: #007bff; /* Blue for add prescription */
+  color: #fff;
+}
+
+/* Close Button Positioning */
+.patientinfo-appointment-modal-close {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #aaa;
+}
+
+.patientinfo-appointment-modal-close:hover {
+  color: #000;
+}
+
+/* Animation for Fade-In Effect */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
