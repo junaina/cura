@@ -1,0 +1,115 @@
+/* Main Page Container */
+.doctor-profile-page {
+  font-family: Arial, sans-serif;
+  background-color: #45b2eb;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* Profile Content */
+.doctor-profile-content {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: scroll;
+  width: 100%;
+  height: 90%;
+}
+
+/* Profile Card */
+.profile-card {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-card h3 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.profile-card p {
+  font-size: 16px;
+  margin: 5px 0;
+  color: #555;
+}
+
+.profile-card strong {
+  color: #45b2eb;
+}
+
+/* Availability Section */
+.availability-form,
+.availability-table {
+  margin-top: 20px;
+}
+
+.availability-form label {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #333;
+}
+
+.availability-form input,
+.availability-form select {
+  width: 97%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.availability-form button {
+  margin-top: 20px;
+  background-color: #45b2eb;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.availability-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Availability Table */
+.availability-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.availability-table th,
+.availability-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.availability-table th {
+  background-color: #45b2eb;
+  font-weight: bold;
+}
+
+.availability-table td {
+  color: #333;
+}
+
+.availability-table button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.availability-table button:hover {
+  background-color: #b02a37;
+}

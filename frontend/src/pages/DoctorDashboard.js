@@ -7,6 +7,8 @@ const DoctorDashboard = () => {
   const [doctor, setDoctor] = useState(null); // State to store doctor details
   const [appointments, setAppointments] = useState([]); // State to store appointments
   const [loading, setLoading] = useState(true); // Loading state
+  const [currentPage, setCurrentPage] = useState(1); // Current page state
+  const [appointmentsPerPage] = useState(1); // Number of appointments per page
   const [error, setError] = useState(null); // Error state for any API calls
 
   useEffect(() => {
@@ -30,7 +32,7 @@ const DoctorDashboard = () => {
 
         // Fetch appointments for the doctor
         const appointmentsResponse = await axios.get(
-          `http://localhost:5000/api/appointments/doctor/${doctorId}`
+          `http://localhost:5000/api/appointments/doctor-appointments?doctorId=${doctorId}`
         );
         console.log("Appointments Data:", appointmentsResponse.data); // Log appointments data
 
@@ -45,6 +47,15 @@ const DoctorDashboard = () => {
 
     fetchDoctorData();
   }, []);
+  // Pagination logic
+  const indexOfLastAppointment = currentPage * appointmentsPerPage;
+  const indexOfFirstAppointment = indexOfLastAppointment - appointmentsPerPage;
+  const currentAppointments = appointments.slice(
+    indexOfFirstAppointment,
+    indexOfLastAppointment
+  );
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   // Loading state or error handling
   if (loading) return <p>Loading...</p>;
@@ -54,7 +65,7 @@ const DoctorDashboard = () => {
     <div className="doctor-dashboard">
       <NavbarForDoctor /> {/* NavbarForDoctor component */}
       <div className="dashboard-content">
-        <div className="doctor-profile">
+        <div className="doctor-profile-card">
           <h2>{doctor.user_id.name}'s Dashboard</h2>
           <p>
             <strong>Specialization:</strong> {doctor.specialization}
@@ -73,35 +84,42 @@ const DoctorDashboard = () => {
         <div className="appointments-section">
           <h3>Appointments</h3>
           {appointments.length > 0 ? (
-            <table className="appointments-table">
-              <thead>
-                <tr>
-                  <th>Patient Name</th>
-                  <th>Date</th>
-                  <th>Time</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {appointments.map((appointment) => (
-                  <tr key={appointment._id}>
-                    <td>{appointment.patient_name}</td>
-                    <td>{appointment.date}</td>
-                    <td>{appointment.time}</td>
-                    <td>{appointment.status}</td>
-                    <td>
-                      <button
-                        className="btn-action"
-                        onClick={() => handleAppointmentAction(appointment)}
-                      >
-                        View Details
-                      </button>
-                    </td>
+            <>
+              <table className="appointments-table">
+                <thead>
+                  <tr>
+                    <th>Patient Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {appointments.map((appointment) => (
+                    <tr key={appointment._id}>
+                      <td>{appointment.patient_name}</td>
+                      <td>{appointment.date}</td>
+                      <td>{appointment.time}</td>
+                      <td>{appointment.status}</td>
+                      <td>
+                        <button
+                          className="btn-action"
+                          onClick={() => handleAppointmentAction(appointment)}
+                        >
+                          View Details
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <Pagination
+                appointmentsPerPage={appointmentsPerPage}
+                totalAppointments={appointments.length}
+                paginate={paginate}
+              />
+            </>
           ) : (
             <p>No appointments found</p>
           )}
@@ -117,4 +135,29 @@ const handleAppointmentAction = (appointment) => {
   // Handle action based on the appointment (e.g., view details, confirm, or cancel)
 };
 
+const Pagination = ({ appointmentsPerPage, totalAppointments, paginate }) => {
+  const pageNumbers = [];
+
+  for (
+    let i = 1;
+    i <= Math.ceil(totalAppointments / appointmentsPerPage);
+    i++
+  ) {
+    pageNumbers.push(i);
+  }
+
+  return (
+    <nav>
+      <ul className="pagination">
+        {pageNumbers.map((number) => (
+          <li key={number} className="page-item">
+            <button onClick={() => paginate(number)} className="page-link">
+              {number}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};
 export default DoctorDashboard;

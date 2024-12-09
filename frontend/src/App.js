@@ -17,8 +17,10 @@ import DoctorApplications from "./pages/DoctorApplications"; // Import DoctorApp
 import ManageDoctors from "./components/ManageDoctors"; // Import ManageDoctors component
 import ManagePatients from "./pages/ManagePatients"; // Import ManagePatients component
 import DoctorSearchResults from "./pages/DoctorSearchResults"; // Import the new DoctorSearchResults component
-import DoctorProfile from "./pages/DoctorProfile"; // Import the doctor profile page
+import AppointmentsPage from "./pages/AppointmentsPageDoctorPanel"; // Appointments page
 
+import DoctorProfile from "./pages/DoctorProfile"; // Import the doctor profile page
+import DoctorPanelProfile from "./pages/DoctorPanelProfile"; // Import the doctor panel profile page
 import "./styles/App.css";
 
 const App = () => {
@@ -102,6 +104,11 @@ const App = () => {
           />
           <Route path="/doctor-search" element={<DoctorSearchResults />} />
           <Route path="/doctor-profile/:id" element={<DoctorProfile />} />{" "}
+          <Route path="/appointments" element={<AppointmentsPage />} />
+          <Route
+            path="/doctor-dashboard/profile"
+            element={<DoctorPanelProfile />}
+          />
           {/* Doctor Profile Route */}
           {/* Default Route */}
           <Route path="*" element={<Navigate to="/signup" replace />} />

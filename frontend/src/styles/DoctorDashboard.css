@@ -8,19 +8,21 @@
 }
 
 .dashboard-content {
-  margin-left: 0px; /* Space for the sidebar */
+  margin-left: 10px; /* Space for the sidebar */
   padding: 0px;
   justify-content: left;
   flex-direction: column;
-  align-items: center;
   width: 100%;
 }
 
-.doctor-profile {
+.doctor-profile-card {
   background: #fff;
   padding: 0px;
   margin-bottom: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding: 20px;
+  border-radius: 15px;
 }
 
 .doctor-profile h2 {
@@ -32,11 +34,17 @@
   font-size: 22px;
   margin-bottom: 10px;
 }
+.appointments-section {
+  background-color: #fff;
+  padding-left: 10px;
+}
 
 .appointments-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+
+  background-color: #fff;
 }
 
 .appointments-table th,
@@ -63,4 +71,29 @@
 
 .btn-action:hover {
   background-color: #0056b3;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #f9f9f9;
+}
+
+.page-link:hover {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
 }

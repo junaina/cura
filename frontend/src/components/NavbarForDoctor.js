@@ -17,7 +17,7 @@ const NavbarForDoctor = () => {
           </Link>
         </li>
         <li>
-          <Link to="/doctor-dashboard/appointments" className="nav-link">
+          <Link to="/appointments" className="nav-link">
             Appointments
           </Link>
         </li>
