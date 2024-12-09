@@ -103,9 +103,18 @@ const ManageDoctors = () => {
         {/* Filter by specialization */}
         <select onChange={(e) => setSpecialization(e.target.value)}>
           <option value="">All Specializations</option>
-          <option value="Cardiology">Cardiology</option>
+          <option value="Cardiologist">Cardiologist</option>
+          <option value="Pulmonologist">Pulmonologist</option>
           <option value="General Practice">General Practice</option>
           <option value="Neurology">Neurology</option>
+          <option value="Orthopedic">Orthopedic</option>
+          <option value="Dermatologist">Dermatologist</option>
+          <option value="Gynecologist">Gynecologist</option>
+          <option value="Ophthalmologist">Ophthalmologist</option>
+          <option value="Pediatrician">Pediatrician</option>
+          <option value="Psychiatrist">Psychiatrist</option>
+          <option value="Radiologist">Radiologist</option>
+          <option value="Urologist">Urologist</option>
         </select>
 
         <div className="doctor-list">

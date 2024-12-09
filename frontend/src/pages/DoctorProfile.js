@@ -112,6 +112,7 @@ const DoctorProfile = () => {
                   <li key={index}>
                     {slot.day}: {slot.start_time} - {slot.end_time}
                     <button
+                      className="dr-profile-btn"
                       onClick={() => {
                         setSelectedSlot(slot);
                         setModalOpen(true);
@@ -140,8 +141,18 @@ const DoctorProfile = () => {
                 <strong>Time:</strong> {selectedSlot.start_time} -{" "}
                 {selectedSlot.end_time}
               </p>
-              <button onClick={handleBookAppointment}>Confirm</button>
-              <button onClick={() => setModalOpen(false)}>Cancel</button>
+              <button
+                className="dr-profile-btn"
+                onClick={handleBookAppointment}
+              >
+                Confirm
+              </button>
+              <button
+                className="dr-pofile-btn"
+                onClick={() => setModalOpen(false)}
+              >
+                Cancel
+              </button>
               {appointmentError && <p className="error">{appointmentError}</p>}
             </div>
           </div>

@@ -55,7 +55,7 @@
   width: 100%;
 }
 
-button {
+.dr-profile-btn {
   padding: 10px 15px;
   background-color: #007bff;
   color: white;
@@ -64,7 +64,7 @@ button {
   margin: 10px;
 }
 
-button:hover {
+.dr-profile-btn:hover {
   background-color: #0056b3;
 }
 

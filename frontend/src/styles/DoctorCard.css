@@ -38,7 +38,7 @@
   margin-top: 15px;
 }
 /* Styling for the buttons */
-button {
+.dr-card-btns {
   padding: 10px 15px;
   font-size: 1rem;
   border: none;
@@ -48,32 +48,32 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+.dr-card-btns:hover {
   background-color: #4caf50; /* Button hover effect */
   color: white;
 }
 
 /* Specific button styling */
-button:focus {
+.dr-card-btns:focus {
   outline: none; /* Remove focus outline */
 }
 
-button:nth-child(4) {
+.dr-card-delete {
   background-color: #ff4747; /* Delete button */
   color: white;
 }
 
-button:nth-child(3) {
+.dr-card-update-profile {
   background-color: #ffb84d; /* Update button */
   color: white;
 }
 
-button:nth-child(2) {
+.dr-card-view-appointments {
   background-color: #45b2eb; /* View Appointments button */
   color: white;
 }
 
-button:nth-child(1) {
+.dr-card-details {
   background-color: #45b2eb; /* View Details button */
   color: white;
 }

@@ -10,8 +10,8 @@ const AdminDashboard = () => {
     <div className="admin-dashboard">
       <Navbar />
       <div className="dashboard-content">
-        <GreetingCard />
         <div className="card-container">
+          <GreetingCard />
           <ApproveDoctorApplicationsCard />
         </div>
       </div>

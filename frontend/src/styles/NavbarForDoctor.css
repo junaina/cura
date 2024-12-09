@@ -16,7 +16,7 @@
   padding: 20px 10px;
   flex-wrap: wrap;
 }
-.patient-navbar {
+.doctor-navbar {
   display: flex;
   flex-direction: column;
   justify-content: start;

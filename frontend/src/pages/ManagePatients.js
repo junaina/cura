@@ -172,7 +172,7 @@ const ManagePatients = () => {
                   <option value="other">Other</option>
                 </select>
               </div>
-              <div>
+              <div className="dob-field">
                 <label>Date of Birth:</label>
                 <input
                   type="date"

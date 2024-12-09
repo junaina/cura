@@ -5,7 +5,7 @@ import "../styles/PatientDashNav.css"; // Separate CSS for styling
 
 const NavbarForDoctor = () => {
   return (
-    <aside className="patient-navbar">
+    <aside className="doctor-navbar">
       <div className="logo">
         <Logo />
       </div>

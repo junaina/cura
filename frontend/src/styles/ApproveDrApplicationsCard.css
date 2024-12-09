@@ -1,4 +1,8 @@
 .approve-doctor-card {
+  overflow: auto;
+  z-index: 1;
+  justify-content: right;
+  align-self: flex-end;
   display: flex;
   flex-direction: column;
   background: linear-gradient(
@@ -11,8 +15,8 @@
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   text-align: left;
   width: 100%;
+
   max-width: 300px; /* Adjust based on your layout */
-  margin: 0; /* Center the card */
   background: rgba(255, 255, 255, 0.27);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -21,6 +25,10 @@
   border: 1px solid rgba(255, 255, 255, 0.3);
   margin-left: 0px;
   margin-right: 0px;
+  height: 37%;
+  position: absolute;
+  left: 75%;
+  top: 3%;
 }
 
 .approve-doctor-title {

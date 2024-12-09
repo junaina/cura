@@ -25,12 +25,30 @@ const DoctorCard = ({
 
       <div className="actions">
         {/* View Details Button */}{" "}
-        <button onClick={() => onViewDetails(doctor)}>View Details</button>
-        <button onClick={() => onViewAppointments(doctor)}>
+        <button
+          className="dr-card-details dr-card-btns"
+          onClick={() => onViewDetails(doctor)}
+        >
+          View Details
+        </button>
+        <button
+          className="dr-card-view-appointments dr-card-btns"
+          onClick={() => onViewAppointments(doctor)}
+        >
           View Appointments
         </button>
-        <button onClick={() => onUpdateProfile(doctor)}>Update Profile</button>
-        <button onClick={() => onDelete(doctor)}>Delete</button>
+        <button
+          className="dr-card-update-profile dr-card-btns"
+          onClick={() => onUpdateProfile(doctor)}
+        >
+          Update Profile
+        </button>
+        <button
+          className="dr-card-delete dr-card-btns"
+          onClick={() => onDelete(doctor)}
+        >
+          Delete
+        </button>
       </div>
     </div>
   );

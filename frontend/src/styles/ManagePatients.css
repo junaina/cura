@@ -105,6 +105,9 @@ input {
 button {
   margin: 5px;
 }
+.dob-field input {
+  width: 96%;
+}
 
 .cancel-button {
   background-color: #f44336;
