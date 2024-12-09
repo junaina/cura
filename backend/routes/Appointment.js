@@ -83,4 +83,42 @@ router.get("/doctor/:doctorId", async (req, res) => {
       .json({ msg: "Server error, unable to fetch appointments." });
   }
 });
+router.get("/doctor-appointments", async (req, res) => {
+  const doctorId = req.query.doctorId; // Fetch doctor ID from query params
+
+  if (!doctorId) {
+    return res.status(400).json({ msg: "Doctor ID is required" });
+  }
+
+  try {
+    const appointments = await Appointment.find({ doctor_id: doctorId })
+      .populate({
+        path: "patient_id", // Populate patient details from Patient schema
+        populate: {
+          path: "_id", // Populate user details from User schema
+          model: "User", // Specify the model name
+          select: "name email", // Fetch name and email from User schema
+        },
+      })
+      .sort({ date: 1, time: 1 }); // Sort appointments by date and time
+    // Transform data to include patient name directly in the response
+    const formattedAppointments = appointments.map((appointment) => ({
+      ...appointment.toObject(),
+      patient_name: appointment.patient_id._id.name, // Access patient's user name
+      patient_email: appointment.patient_id._id.email, // Access patient's user email
+    }));
+
+    if (!appointments.length) {
+      return res
+        .status(404)
+        .json({ msg: "No appointments found for this doctor." });
+    }
+    res.status(200).json(formattedAppointments);
+  } catch (err) {
+    console.error("Error fetching appointments:", err);
+    res
+      .status(500)
+      .json({ msg: "Server error. Unable to fetch appointments." });
+  }
+});
 module.exports = router;

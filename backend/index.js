@@ -43,7 +43,7 @@ app.use("/api/user", userRoutes); // This registers all routes from User.js unde
 
 app.use("/api/user", forgotPasswordRoutes);
 app.use("/api/appointments", appointmentRoutes); // Route prefix
-app.use("/api/appointments", require("./routes/appointment"));
+app.use("/api/appointments", require("./routes/Appointment"));
 app.use("/api/patients", patientRoutes); //this is for patient routes in the admin dashboard, not related to patient dashboard
 app.use("/api/patientSearch", require("./routes/doctorSearch"));
 app.use("/api/doctor", doctorSearchRoutes); // This should match the `GET /api/doctor/:id` route
