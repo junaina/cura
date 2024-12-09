@@ -10,6 +10,7 @@ const cors = require("cors");
 const forgotPasswordRoutes = require("./routes/ForgotPassword");
 const doctorSearchRoutes = require("./routes/doctorSearch"); // Import the doctor search routes
 const availabilityRoutes = require("./routes/Availability");
+const patientManagementRoutes = require("./routes/patientManagement");
 
 // Load environment variables
 dotenv.config();
@@ -49,6 +50,8 @@ app.use("/api/patients", patientRoutes); //this is for patient routes in the adm
 app.use("/api/patientSearch", require("./routes/doctorSearch"));
 app.use("/api/doctor", doctorSearchRoutes); // This should match the `GET /api/doctor/:id` route
 app.use("/api/availability", availabilityRoutes); // For availability settings
+
+app.use("/api/patient-management", patientManagementRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5000;
