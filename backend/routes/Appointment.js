@@ -84,6 +84,8 @@ router.get("/doctor/:doctorId", async (req, res) => {
   }
 });
 router.get("/doctor-appointments", async (req, res) => {
+  console.log("Appointments API hit with doctorId:", req.query.doctorId);
+
   const doctorId = req.query.doctorId; // Fetch doctor ID from query params
 
   if (!doctorId) {
@@ -101,14 +103,20 @@ router.get("/doctor-appointments", async (req, res) => {
         },
       })
       .sort({ date: 1, time: 1 }); // Sort appointments by date and time
+    if (!appointments.length) {
+      return res.status(200).json([]); // Return empty array with 200 OK
+    }
+    console.log("Fetched Appointments:", appointments);
+
     // Transform data to include patient name directly in the response
     const formattedAppointments = appointments.map((appointment) => ({
       ...appointment.toObject(),
       patient_name: appointment.patient_id._id.name, // Access patient's user name
       patient_email: appointment.patient_id._id.email, // Access patient's user email
     }));
-
+    console.log("Formatted Appointments:", formattedAppointments);
     if (!appointments.length) {
+      console.log("No appointments found for this doctor.");
       return res
         .status(404)
         .json({ msg: "No appointments found for this doctor." });

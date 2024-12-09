@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Availability = require("../models/Availability");
+const Doctor = require("../models/Doctor");
 router.get("/:doctorId", async (req, res) => {
   try {
     const availability = await Availability.find({
@@ -14,6 +15,11 @@ router.get("/:doctorId", async (req, res) => {
 });
 router.post("/", async (req, res) => {
   const { doctor_id, day, start_time, end_time } = req.body;
+  // Check if the doctor exists
+  const doctor = await Doctor.findById(doctor_id);
+  if (!doctor) {
+    return res.status(404).json({ message: "Doctor not found." });
+  }
   try {
     const newAvailability = new Availability({
       doctor_id,
@@ -21,7 +27,10 @@ router.post("/", async (req, res) => {
       start_time,
       end_time,
     });
-    await newAvailability.save();
+    const savedAvailability = await newAvailability.save();
+    // Update the doctor document to include this availability
+    doctor.availability.push(savedAvailability._id);
+    await doctor.save();
     res
       .status(201)
       .json({ message: "Availability added successfully", newAvailability });

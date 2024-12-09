@@ -161,10 +161,10 @@ const AppointmentsPageDoctorPanel = () => {
 
   return (
     <div className="appointments-page">
-      <div className="appointments-page">
-        <NavbarForDoctor />
+      <NavbarForDoctor />
+      <div className="appointments-page-2">
         <div className="appointments-content">
-          <h3>Appointments</h3>
+          <h2>Appointments</h2>
           {appointments.length > 0 ? (
             <>
               <table className="appointments-table">

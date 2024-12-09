@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../components/Logo"; // Adjust the path as needed
-import "../styles/PatientDashNav.css"; // Separate CSS for styling
+import "../styles/NavbarForDoctor.css"; // Separate CSS for styling
 
 const NavbarForDoctor = () => {
   return (

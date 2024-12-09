@@ -8,7 +8,7 @@
 }
 
 .dashboard-content {
-  margin-left: 10px; /* Space for the sidebar */
+  margin-left: 20%; /* Space for the sidebar */
   padding: 0px;
   justify-content: left;
   flex-direction: column;

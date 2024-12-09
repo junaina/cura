@@ -29,6 +29,7 @@ const DoctorForm = ({ formData, handleChange, errors }) => {
           type="date"
           name="dob"
           placeholder="Date of Birth"
+          className="doctor-dob"
           value={formData.dob}
           onChange={handleChange}
           required

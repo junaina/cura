@@ -31,7 +31,9 @@
   box-sizing: border-box;
   margin: 10px;
 }
-
+.doctor-dob {
+  width: 97%;
+}
 input {
   max-width: 100%;
   padding: 10px;

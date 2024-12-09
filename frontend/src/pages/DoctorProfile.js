@@ -12,6 +12,8 @@ const DoctorProfile = () => {
   const [modalOpen, setModalOpen] = useState(false); // State to handle modal visibility
   const [selectedSlot, setSelectedSlot] = useState(null); // State to store the selected availability slot
   const [appointmentError, setAppointmentError] = useState(null); // Error state for booking
+  //setAvailability
+  const [availability, setAvailability] = useState([]); // State to store doctor's availability
 
   useEffect(() => {
     const fetchDoctor = async () => {
@@ -19,6 +21,7 @@ const DoctorProfile = () => {
         const response = await axios.get(
           `http://localhost:5000/api/doctor/${id}` // Fetch doctor details from backend
         );
+        console.log("Doctor Details:", response.data); // Log the doctor details
         setDoctor(response.data); // Set the doctor details to state
         setLoading(false); // Set loading to false once data is fetched
       } catch (err) {
@@ -107,6 +110,7 @@ const DoctorProfile = () => {
 
             <h3>Availability</h3>
             <ul>
+              {console.log(doctor.availability)}
               {doctor.availability?.length > 0 ? (
                 doctor.availability.map((slot, index) => (
                   <li key={index}>

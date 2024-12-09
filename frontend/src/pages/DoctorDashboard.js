@@ -26,7 +26,7 @@ const DoctorDashboard = () => {
         const response = await axios.get(
           `http://localhost:5000/api/doctor/${doctorId}`
         );
-        console.log("Doctor Details:", response.data); // Log the doctor data
+        console.log("Doctor Details:", response.data); // After fetching doctor
 
         setDoctor(response.data);
 
@@ -34,12 +34,13 @@ const DoctorDashboard = () => {
         const appointmentsResponse = await axios.get(
           `http://localhost:5000/api/appointments/doctor-appointments?doctorId=${doctorId}`
         );
+        console.log("dkfjnrf");
         console.log("Appointments Data:", appointmentsResponse.data); // Log appointments data
 
         setAppointments(appointmentsResponse.data); // Set appointments data
         setLoading(false); // Set loading to false after data is fetched
       } catch (err) {
-        console.error("Error:", err); // Log the error for debugging
+        console.error("Error:", err.response || err.message || err); // Log the error for debugging
         setError("Error fetching doctor details or appointments");
         setLoading(false);
       }
@@ -65,21 +66,25 @@ const DoctorDashboard = () => {
     <div className="doctor-dashboard">
       <NavbarForDoctor /> {/* NavbarForDoctor component */}
       <div className="dashboard-content">
-        <div className="doctor-profile-card">
-          <h2>{doctor.user_id.name}'s Dashboard</h2>
-          <p>
-            <strong>Specialization:</strong> {doctor.specialization}
-          </p>
-          <p>
-            <strong>Email:</strong> {doctor.user_id.email}
-          </p>
-          <p>
-            <strong>Contact Number:</strong> {doctor.contactNumber}
-          </p>
-          <p>
-            <strong>City:</strong> {doctor.city}
-          </p>
-        </div>
+        {doctor ? (
+          <div className="doctor-profile-card">
+            <h2>{doctor.user_id.name}'s Dashboard</h2>
+            <p>
+              <strong>Specialization:</strong> {doctor.specialization}
+            </p>
+            <p>
+              <strong>Email:</strong> {doctor.user_id.email}
+            </p>
+            <p>
+              <strong>Contact Number:</strong> {doctor.contactNumber}
+            </p>
+            <p>
+              <strong>City:</strong> {doctor.city}
+            </p>
+          </div>
+        ) : (
+          <p>Doctor details not available.</p>
+        )}
 
         <div className="appointments-section">
           <h3>Appointments</h3>
