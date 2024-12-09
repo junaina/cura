@@ -45,7 +45,9 @@ router.post("/login", async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
+    let doctor_id = null;
 
+    const doctor = await Doctor.findOne({ user_id: user._id });
     if (user.role === "doctor") {
       const doctor = await Doctor.findOne({ user_id: user._id });
       console.log("Doctor found:", doctor);
@@ -53,9 +55,10 @@ router.post("/login", async (req, res) => {
       if (!doctor) {
         return res.status(404).json({ message: "Doctor profile not found." });
       }
-      if (!doctor.isApproved) {
+      if (!doctor.status === "approved") {
         return res.status(403).json({ message: "Account pending approval." });
       }
+      doctor_id = doctor._id; // Add doctor_id to the response
     }
 
     const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, {
@@ -66,7 +69,8 @@ router.post("/login", async (req, res) => {
       message: "Login successful",
       token,
       role: user.role,
-      patient_id: user._id, // Add patient_id (_id) to the response
+      doctor_id: user.role === "doctor" ? doctor._id : undefined,
+      patient_id: user.role === "patient" ? user._id : undefined,
     });
   } catch (err) {
     console.error("Error in /login route:", err.message, err.stack);

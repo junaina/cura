@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"; // To access the dynamic URL params
 import axios from "axios"; // For making API requests
 import "../styles/DoctorProfile.css"; // Add your styles here
+import PatientDashNav from "../components/patientDashNav";
 
 const DoctorProfile = () => {
   const { id } = useParams(); // Get the doctor ID from the URL
@@ -75,74 +76,77 @@ const DoctorProfile = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="doctor-profile">
-      {doctor && (
-        <>
-          <h2>{doctor.user_id.name}</h2>
-          <p>
-            <strong>Specialization:</strong> {doctor.specialization}
-          </p>
-          <p>
-            <strong>About:</strong> {doctor.about}
-          </p>
-          <p>
-            <strong>City:</strong> {doctor.city}
-          </p>
-          <p>
-            <strong>Email:</strong> {doctor.user_id.email}
-          </p>
-          <p>
-            <strong>Contact Number:</strong> {doctor.contactNumber}
-          </p>
-          <p>
-            <strong>Medical License Number:</strong>{" "}
-            {doctor.medicalLicenseNumber}
-          </p>
-          <p>
-            <strong>Experience:</strong> {doctor.experience} years
-          </p>
-
-          <h3>Availability</h3>
-          <ul>
-            {doctor.availability?.length > 0 ? (
-              doctor.availability.map((slot, index) => (
-                <li key={index}>
-                  {slot.day}: {slot.start_time} - {slot.end_time}
-                  <button
-                    onClick={() => {
-                      setSelectedSlot(slot);
-                      setModalOpen(true);
-                    }}
-                  >
-                    Book Appointment
-                  </button>
-                </li>
-              ))
-            ) : (
-              <p>No availability listed</p>
-            )}
-          </ul>
-        </>
-      )}
-
-      {/* Modal for booking appointment */}
-      {modalOpen && (
-        <div className="appointment-booking-modal">
-          <div className="appointment-modal-content">
-            <h3>Confirm Appointment</h3>
+    <div className="doctor-profile-page">
+      <PatientDashNav />
+      <div className="doctor-profile">
+        {doctor && (
+          <>
+            <h2>{doctor.user_id.name}</h2>
             <p>
-              <strong>Day:</strong> {selectedSlot.day}
+              <strong>Specialization:</strong> {doctor.specialization}
             </p>
             <p>
-              <strong>Time:</strong> {selectedSlot.start_time} -{" "}
-              {selectedSlot.end_time}
+              <strong>About:</strong> {doctor.about}
             </p>
-            <button onClick={handleBookAppointment}>Confirm</button>
-            <button onClick={() => setModalOpen(false)}>Cancel</button>
-            {appointmentError && <p className="error">{appointmentError}</p>}
+            <p>
+              <strong>City:</strong> {doctor.city}
+            </p>
+            <p>
+              <strong>Email:</strong> {doctor.user_id.email}
+            </p>
+            <p>
+              <strong>Contact Number:</strong> {doctor.contactNumber}
+            </p>
+            <p>
+              <strong>Medical License Number:</strong>{" "}
+              {doctor.medicalLicenseNumber}
+            </p>
+            <p>
+              <strong>Experience:</strong> {doctor.experience} years
+            </p>
+
+            <h3>Availability</h3>
+            <ul>
+              {doctor.availability?.length > 0 ? (
+                doctor.availability.map((slot, index) => (
+                  <li key={index}>
+                    {slot.day}: {slot.start_time} - {slot.end_time}
+                    <button
+                      onClick={() => {
+                        setSelectedSlot(slot);
+                        setModalOpen(true);
+                      }}
+                    >
+                      Book Appointment
+                    </button>
+                  </li>
+                ))
+              ) : (
+                <p>No availability listed</p>
+              )}
+            </ul>
+          </>
+        )}
+
+        {/* Modal for booking appointment */}
+        {modalOpen && (
+          <div className="appointment-booking-modal">
+            <div className="appointment-modal-content">
+              <h3>Confirm Appointment</h3>
+              <p>
+                <strong>Day:</strong> {selectedSlot.day}
+              </p>
+              <p>
+                <strong>Time:</strong> {selectedSlot.start_time} -{" "}
+                {selectedSlot.end_time}
+              </p>
+              <button onClick={handleBookAppointment}>Confirm</button>
+              <button onClick={() => setModalOpen(false)}>Cancel</button>
+              {appointmentError && <p className="error">{appointmentError}</p>}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

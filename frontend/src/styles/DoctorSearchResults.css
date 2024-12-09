@@ -1,4 +1,11 @@
 /* Styles for Doctor Search Results Page */
+.search-results-page {
+  padding: 20px;
+  background-color: #45b2eb;
+  height: 92vh;
+  display: flex;
+  flex-direction: row;
+}
 .search-results {
   padding: 20px;
 }
@@ -6,7 +13,7 @@
 .search-results h2 {
   font-size: 24px;
   margin-bottom: 20px;
-  color: #333;
+  color: #ffffff;
 }
 
 .doctor-cards {
@@ -22,7 +29,7 @@
   padding: 20px;
   margin: 10px;
   width: 300px;
-  text-align: center;
+  text-align: left;
 }
 
 .doctor-card-header h3 {

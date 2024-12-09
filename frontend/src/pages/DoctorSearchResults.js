@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import DoctorInfoCard from "../components/DoctorInfoCard"; // A component for rendering individual doctor cards
-
+import PatientDashNav from "../components/patientDashNav"; // A component for the patient dashboard navigation
+import "../styles/DoctorSearchResults.css"; // Styles for the search results page
 const DoctorSearchResults = () => {
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -34,18 +35,21 @@ const DoctorSearchResults = () => {
   }, [query]);
 
   return (
-    <div className="search-results">
-      <h2>Search Results for "{query}"</h2>
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
-      <div className="doctor-cards">
-        {doctors.length > 0 ? (
-          doctors.map((doctor) => (
-            <DoctorInfoCard key={doctor._id} doctor={doctor} />
-          ))
-        ) : (
-          <p>No doctors found.</p>
-        )}
+    <div className="search-results-page">
+      <PatientDashNav />
+      <div className="search-results">
+        <h2>Search Results for "{query}"</h2>
+        {loading && <p>Loading...</p>}
+        {error && <p>{error}</p>}
+        <div className="doctor-cards">
+          {doctors.length > 0 ? (
+            doctors.map((doctor) => (
+              <DoctorInfoCard key={doctor._id} doctor={doctor} />
+            ))
+          ) : (
+            <p>No doctors found.</p>
+          )}
+        </div>
       </div>
     </div>
   );

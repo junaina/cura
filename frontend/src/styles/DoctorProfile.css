@@ -1,3 +1,10 @@
+.doctor-profile-page {
+  padding: 20px;
+  display: flex;
+  background-color: #45b2eb;
+  height: 92vh;
+}
+
 .doctor-profile {
   padding: 20px;
   background-color: #fff;

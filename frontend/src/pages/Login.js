@@ -37,6 +37,9 @@ const Login = () => {
       if (response.data.role === "patient") {
         localStorage.setItem("patient_id", response.data.patient_id); // Store the patient_id from the backend
       }
+      if (response.data.role === "doctor") {
+        localStorage.setItem("doctor_id", response.data.doctor_id); // Store doctor ID
+      }
       // Redirect based on role
       if (response.data.role === "admin") {
         window.location.href = "/admin-dashboard";

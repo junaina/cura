@@ -3,6 +3,7 @@ const router = express.Router();
 const Appointment = require("../models/Appointment");
 const adminAuthMiddleware = require("../middlewares/adminauth"); // Ensure correct import
 const Patient = require("../models/Patient"); // Add this import
+const Doctor = require("../models/Doctor"); // Ensure the Doctor model is imported
 
 // Endpoint to fetch all appointments (Admins only)
 router.get("/all", adminAuthMiddleware, async (req, res) => {
@@ -58,5 +59,28 @@ router.post("/", async (req, res) => {
     res.status(500).json({ msg: "Error creating appointment" });
   }
 });
+// GET appointments by doctor ID
+router.get("/doctor/:doctorId", async (req, res) => {
+  const doctorId = req.params.doctorId; // Get doctor ID from the URL
 
+  try {
+    // Find all appointments for the specified doctor
+    const appointments = await Appointment.find({ doctor_id: doctorId })
+      .populate("patient_id", "name email") // Populate patient details (name and email)
+      .exec();
+
+    if (!appointments.length) {
+      return res
+        .status(404)
+        .json({ msg: "No appointments found for this doctor." });
+    }
+
+    res.json(appointments); // Return the list of appointments
+  } catch (error) {
+    console.error("Error fetching appointments:", error);
+    res
+      .status(500)
+      .json({ msg: "Server error, unable to fetch appointments." });
+  }
+});
 module.exports = router;
