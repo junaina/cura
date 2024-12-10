@@ -4,6 +4,7 @@ const Appointment = require("../models/Appointment");
 const adminAuthMiddleware = require("../middlewares/adminauth"); // Ensure correct import
 const Patient = require("../models/Patient"); // Add this import
 const Doctor = require("../models/Doctor"); // Ensure the Doctor model is imported
+const Availability = require("../models/Availability");
 
 // Endpoint to fetch all appointments (Admins only)
 router.get("/all", adminAuthMiddleware, async (req, res) => {
@@ -23,18 +24,18 @@ router.get("/all", adminAuthMiddleware, async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
-router.get("/doctor/:id", async (req, res) => {
-  try {
-    const doctor = await Doctor.findById(req.params.id); // Find doctor by ID
-    if (!doctor) {
-      return res.status(404).json({ message: "Doctor not found" });
-    }
-    res.json(doctor);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Server error" });
-  }
-});
+// router.get("/doctor/:id", async (req, res) => {
+//   try {
+//     const doctor = await Doctor.findById(req.params.id); // Find doctor by ID
+//     if (!doctor) {
+//       return res.status(404).json({ message: "Doctor not found" });
+//     }
+//     res.json(doctor);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ message: "Server error" });
+//   }
+// });
 // Route for creating an appointment
 router.post("/", async (req, res) => {
   const { doctor_id, patient_id, date, time } = req.body;
@@ -53,36 +54,42 @@ router.post("/", async (req, res) => {
     });
 
     const savedAppointment = await newAppointment.save();
+    // Update the doctor's appointments array
+    await Doctor.findByIdAndUpdate(
+      doctor_id,
+      { $push: { appointments: savedAppointment._id } }, // Push the new appointment ID
+      { new: true, useFindAndModify: false } // Return updated document, disable deprecation warnings
+    );
+
     res.status(201).json(savedAppointment);
   } catch (err) {
     console.error("Error creating appointment:", err);
     res.status(500).json({ msg: "Error creating appointment" });
   }
 });
-// GET appointments by doctor ID
-router.get("/doctor/:doctorId", async (req, res) => {
-  const doctorId = req.params.doctorId; // Get doctor ID from the URL
-
+router.get("/doctor/:id", async (req, res) => {
   try {
-    // Find all appointments for the specified doctor
-    const appointments = await Appointment.find({ doctor_id: doctorId })
-      .populate("patient_id", "name email") // Populate patient details (name and email)
-      .exec();
+    const doctor = await Doctor.findById(req.params.id)
+      .populate({
+        path: "appointments", // Populate the appointments field
+        populate: {
+          path: "patient_id", // Populate patient details inside each appointment
+          select: "name email", // Specify the fields you want from the patient
+        },
+      })
+      .populate("availability");
 
-    if (!appointments.length) {
-      return res
-        .status(404)
-        .json({ msg: "No appointments found for this doctor." });
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor not found" });
     }
 
-    res.json(appointments); // Return the list of appointments
-  } catch (error) {
-    console.error("Error fetching appointments:", error);
-    res
-      .status(500)
-      .json({ msg: "Server error, unable to fetch appointments." });
+    res.json(doctor);
+  } catch (err) {
+    console.error("Error fetching doctor details:", err);
+    res.status(500).json({ message: "Server error" });
   }
 });
+
 router.get("/doctor-appointments", async (req, res) => {
   console.log("Appointments API hit with doctorId:", req.query.doctorId);
 
@@ -127,6 +134,83 @@ router.get("/doctor-appointments", async (req, res) => {
     res
       .status(500)
       .json({ msg: "Server error. Unable to fetch appointments." });
+  }
+});
+//for patients panel
+router.get("/patient-appointments/:patientId", async (req, res) => {
+  const patientId = req.params.patientId;
+
+  if (!patientId) {
+    return res.status(400).json({ message: "Patient ID is required." });
+  }
+
+  try {
+    const appointments = await Appointment.find({ patient_id: patientId })
+      .populate({
+        path: "doctor_id",
+        select: "user_id specialization",
+        populate: { path: "user_id", select: "name email" },
+      }) // Populate doctor and user details
+      .sort({ date: 1, time: 1 }); // Sort by date and time
+
+    if (!appointments.length) {
+      return res.status(200).json([]); // Return an empty array if no appointments
+    }
+
+    res.status(200).json(appointments);
+  } catch (error) {
+    console.error("Error fetching patient appointments:", error);
+    res.status(500).json({ message: "Internal server error." });
+  }
+});
+
+router.put("/reschedule/:id", async (req, res) => {
+  const { id } = req.params; // Appointment ID
+  const { date, startTime, endTime } = req.body; // New date and times
+
+  if (!date || !startTime || !endTime) {
+    return res
+      .status(400)
+      .json({ message: "Date, start time, and end time are required." });
+  }
+
+  try {
+    const appointment = await Appointment.findById(id);
+    if (!appointment) {
+      return res.status(404).json({ message: "Appointment not found." });
+    }
+
+    appointment.date = date;
+    appointment.time = `${startTime} - ${endTime}`;
+    await appointment.save();
+
+    res
+      .status(200)
+      .json({ message: "Appointment rescheduled successfully.", appointment });
+  } catch (err) {
+    console.error("Error rescheduling appointment:", err);
+    res.status(500).json({ message: "Server error." });
+  }
+});
+
+router.put("/cancel/:id", async (req, res) => {
+  const { id } = req.params; // Appointment ID
+
+  try {
+    const appointment = await Appointment.findById(id);
+    if (!appointment) {
+      return res.status(404).json({ message: "Appointment not found." });
+    }
+
+    appointment.status = "cancelled";
+    await appointment.save();
+
+    res
+      .status(200)
+      .json({ message: "Appointment cancelled successfully.", appointment });
+  } catch (err) {
+    console.error("Error cancelling appointment:", err);
+    res.status(500).json({ message: "Server error." });
   }
 });
 

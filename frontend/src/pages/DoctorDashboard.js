@@ -8,7 +8,7 @@ const DoctorDashboard = () => {
   const [appointments, setAppointments] = useState([]); // State to store appointments
   const [loading, setLoading] = useState(true); // Loading state
   const [currentPage, setCurrentPage] = useState(1); // Current page state
-  const [appointmentsPerPage] = useState(1); // Number of appointments per page
+  const [appointmentsPerPage] = useState(4); // Number of appointments per page
   const [error, setError] = useState(null); // Error state for any API calls
 
   useEffect(() => {
@@ -97,24 +97,15 @@ const DoctorDashboard = () => {
                     <th>Date</th>
                     <th>Time</th>
                     <th>Status</th>
-                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {appointments.map((appointment) => (
+                  {currentAppointments.map((appointment) => (
                     <tr key={appointment._id}>
                       <td>{appointment.patient_name}</td>
                       <td>{appointment.date}</td>
                       <td>{appointment.time}</td>
                       <td>{appointment.status}</td>
-                      <td>
-                        <button
-                          className="btn-action"
-                          onClick={() => handleAppointmentAction(appointment)}
-                        >
-                          View Details
-                        </button>
-                      </td>
                     </tr>
                   ))}
                 </tbody>

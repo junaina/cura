@@ -21,7 +21,7 @@ const PatientDashNav = () => {
           </Link>
         </li>
         <li>
-          <Link to="/patient-prescriptions" className="nav-link">
+          <Link to="/view-prescriptions" className="nav-link">
             Prescriptions
           </Link>
         </li>

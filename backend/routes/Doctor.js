@@ -348,7 +348,7 @@ router.get("/:id", async (req, res) => {
     const doctor = await Doctor.findById(req.params.id)
       .populate("user_id", "name email") // Populate user details (name and email)
       .populate("specialization") // Optionally, populate specialization
-      .populate("appointments") // Populate appointments
+      .populate("appointments") //
       .populate("availability"); // Populate availability slots
 
     if (!doctor) {

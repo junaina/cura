@@ -1,0 +1,211 @@
+/* Page Container */
+.patient-appointments-page {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  height: 100vh;
+  display: flex;
+  background-color: #45b2eb;
+}
+
+/* Appointments Container */
+.patient-appointments-container {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+  margin-bottom: auto;
+  margin-right: auto;
+  margin-top: 3%;
+}
+
+/* Title */
+.patient-appointments-container h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+/* Table */
+.patients-appointment-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+/* Table Headers */
+.patients-appointment-table-header {
+  background-color: #f4f4f4;
+}
+
+.patients-appointment-table-headings {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Table Rows and Data */
+.patients-appointment-table-row {
+  transition: background-color 0.2s ease-in-out;
+}
+
+.patients-appointment-table-data {
+  padding: 10px;
+  border: 1px solid #ddd;
+  color: #555;
+}
+
+/* Alternating Row Backgrounds */
+.patients-appointment-table-body tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.patients-appointment-table-body tr:hover {
+  background-color: #eaeaea;
+}
+
+/* No Appointments Message */
+.patient-appointments-container p {
+  text-align: center;
+  font-size: 16px;
+  color: #777;
+  margin-top: 20px;
+}
+
+/* Loading and Error Messages */
+.patient-appointments-page p {
+  font-size: 16px;
+  color: #d9534f; /* Red for error */
+  text-align: center;
+  margin-top: 20px;
+}
+/* Pagination Container */
+.patient-pagination-nav {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.patient-pagination {
+  list-style: none;
+  display: inline-flex;
+  gap: 10px;
+  padding: 0;
+}
+
+.patient-pagination-item {
+  border: 1px solid #45b2eb;
+  border-radius: 4px;
+}
+
+.patient-pagination-item.active {
+  background-color: #45b2eb;
+  color: #fff;
+}
+
+.patient-pagination-button {
+  background: none;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.patient-pagination-button:hover {
+  background-color: #f0f0f0;
+}
+.reschedule-button,
+.cancel-button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.reschedule-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.reschedule-button:hover {
+  background-color: #0056b3;
+}
+
+.cancel-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.cancel-button:hover {
+  background-color: #a71d2a;
+}
+.patients-appointments-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.patients-appointments-modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.patients-appointments-modal-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.patients-appointments-modal-button:hover {
+  background-color: #0056b3;
+}
+
+.patients-appointments-modal-close-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.patients-appointments-modal-close-button:hover {
+  background-color: #a71d2a;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .patients-appointment-table {
+    font-size: 14px;
+  }
+
+  .patient-appointments-container h1 {
+    font-size: 20px;
+  }
+
+  .patients-appointment-table-headings,
+  .patients-appointment-table-data {
+    padding: 8px;
+  }
+}

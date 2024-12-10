@@ -8,13 +8,6 @@ const DoctorCard = ({
   onUpdateProfile,
   onDelete,
 }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
-
-  const handleViewDetails = () => {
-    setIsModalOpen(true); // Open the modal
-    onViewDetails(doctor); // Optional: Trigger a parent function when details are viewed
-  };
-
   return (
     <div className="doctor-card">
       <div className="doctor-info">
@@ -45,7 +38,7 @@ const DoctorCard = ({
         </button>
         <button
           className="dr-card-delete dr-card-btns"
-          onClick={() => onDelete(doctor)}
+          onClick={() => onDelete(doctor._id)}
         >
           Delete
         </button>

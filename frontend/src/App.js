@@ -18,6 +18,8 @@ import ManageDoctors from "./components/ManageDoctors"; // Import ManageDoctors 
 import ManagePatients from "./pages/ManagePatients"; // Import ManagePatients component
 import DoctorSearchResults from "./pages/DoctorSearchResults"; // Import the new DoctorSearchResults component
 import AppointmentsPage from "./pages/AppointmentsPageDoctorPanel"; // Appointments page
+import PatientAppointmentsPage from "./pages/PatientAppointmentsPage"; // Import the PatientAppointments page
+import ViewPrescriptions from "./pages/ViewPrescriptions"; // Adjust the path as necessary
 
 import DoctorProfile from "./pages/DoctorProfile"; // Import the doctor profile page
 import DoctorPanelProfile from "./pages/DoctorPanelProfile"; // Import the doctor panel profile page
@@ -97,6 +99,26 @@ const App = () => {
             element={
               getRole() === "admin" ? (
                 <ManagePatients />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
+          />
+          <Route
+            path="/patient-appointments"
+            element={
+              getRole() === "patient" ? (
+                <PatientAppointmentsPage />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
+          />
+          <Route
+            path="/view-prescriptions"
+            element={
+              getRole() === "patient" ? (
+                <ViewPrescriptions />
               ) : (
                 <Navigate to="/login" replace />
               )

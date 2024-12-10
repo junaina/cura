@@ -184,7 +184,7 @@ const AppointmentsPageDoctorPanel = () => {
                       <td>{appointment.date}</td>
                       <td>{appointment.time}</td>
                       <td>{appointment.status}</td>
-                      <td>
+                      <td className="actions-doctor-patient-appointments">
                         <button
                           className="btn-action view"
                           onClick={() => handleViewAppointment(appointment)}
