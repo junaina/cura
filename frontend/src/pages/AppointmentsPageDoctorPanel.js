@@ -104,8 +104,6 @@ const AppointmentsPageDoctorPanel = () => {
       alert("Medical record saved successfully.");
       console.log("Record saved:", response.data);
 
-      // Optionally update the UI or trigger further actions here
-
       handleCloseModal(); // Close the modal after saving
     } catch (err) {
       console.error("Error saving medical record:", err);
