@@ -22,13 +22,13 @@ const DoctorDashboard = () => {
           return; // Exit early if doctor ID is missing
         }
 
-        // Fetch doctor details
-        const response = await axios.get(
-          `http://localhost:5000/api/doctor/${doctorId}`
-        );
-        console.log("Doctor Details:", response.data); // After fetching doctor
+        // // Fetch doctor details
+        // const response = await axios.get(
+        //   `http://localhost:5000/api/doctor/${doctorId}`
+        // );
+        // console.log("Doctor Details:", response.data); // After fetching doctor
 
-        setDoctor(response.data);
+        // setDoctor(response.data);
 
         // Fetch appointments for the doctor
         const appointmentsResponse = await axios.get(
